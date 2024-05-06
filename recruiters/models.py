@@ -29,7 +29,7 @@ class Category(models.Model):
 
 class JobPost(models.Model):
     recruiter = models.ForeignKey(Recruiter, related_name='posts', on_delete=models.CASCADE)
-    category = models.OneToOneField(Category, related_name='category', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='posts', on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     description = models.TextField()
     candidates_number = models.IntegerField()
@@ -39,7 +39,7 @@ class JobPost(models.Model):
 
 
 class Applied(models.Model):
-    application = models.ForeignKey(Application, related_name='applies_from', on_delete=models.CASCADE)
+    recruiter = models.ForeignKey(Recruiter, related_name='applies_from', on_delete=models.CASCADE)
     applicant = models.ForeignKey(Applicant, related_name='applied_for', on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
 
@@ -47,4 +47,5 @@ class Applied(models.Model):
 class Interview(models.Model):
     recruiter = models.ForeignKey(Recruiter, related_name='interviews', on_delete=models.CASCADE)
     applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
+    jobPost = models.ForeignKey(JobPost, on_delete=models.CASCADE)
     date = models.DateTimeField()

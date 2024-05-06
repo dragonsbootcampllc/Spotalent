@@ -5,16 +5,27 @@ from recruiters.models import Recruiter, Question, Application, Category, JobPos
 from recruiters.models import JobPost, Application
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ['id','username', 'email']
 
 # serialize all the modles
 class RecruiterSerializer(serializers.ModelSerializer):
+    user = serializers.DictField(write_only=True)
+    
     class Meta:
         model = Recruiter
-        fields = ['user','date_of_birth']
+        fields = ['id','user', 'date_of_birth']
+
+    def create(self, validated_data):
+        user_data = validated_data.pop('user', None)
+        if user_data:
+            user_serializer = UserSerializer(data=user_data)
+            user_serializer.is_valid(raise_exception=True)
+            user = user_serializer.save()
+            validated_data['user'] = user
+        return super().create(validated_data)
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,7 +35,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['name']
+        fields = ['id','name']
 
 class ApplicationSerializer(serializers.ModelSerializer):
     questions = QuestionSerializer(many=True)
@@ -44,28 +55,34 @@ class ApplicationSerializer(serializers.ModelSerializer):
 
 
 class JobPostSerializer(serializers.ModelSerializer):
+    recruiter = serializers.PrimaryKeyRelatedField(queryset=Recruiter.objects.all())
+    
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), required=False)
-    application = ApplicationSerializer()  # Add this line
+    application = ApplicationSerializer(write_only=True)
 
     class Meta:
         model = JobPost
-        fields = ['recruiter', 'category', 'name', 'description', 'candidates_number', 'application', 'active']
+        fields = ['id','recruiter', 'category', 'name', 'description', 'candidates_number', 'application', 'active']
     
     def create(self, validated_data):
         application_data = validated_data.pop('application', None)
         job_post = JobPost.objects.create(**validated_data)
+        
         if application_data:
             application_serializer = ApplicationSerializer(data=application_data)
             application_serializer.is_valid(raise_exception=True)
-            application_serializer.save()
-            job_post.application = application_serializer.instance
+            application = application_serializer.save()
+            job_post.application = application
+            job_post.save()
+        
         return job_post
+
     
 
 class AppliedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Applied
-        fields = ['application','applicant','approved']
+        fields = ['recruiter','applicant','approved']
 
 class InterviewSerializer(serializers.ModelSerializer):
     class Meta:
