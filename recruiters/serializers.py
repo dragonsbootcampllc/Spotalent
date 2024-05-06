@@ -55,8 +55,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
 
 
 class JobPostSerializer(serializers.ModelSerializer):
-    recruiter = serializers.PrimaryKeyRelatedField(queryset=Recruiter.objects.all())
-    
+    recruiter = serializers.PrimaryKeyRelatedField(queryset=Recruiter.objects.all(), required=False)
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), required=False)
     application = ApplicationSerializer(write_only=True)
 
@@ -66,7 +65,8 @@ class JobPostSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         application_data = validated_data.pop('application', None)
-        job_post = JobPost.objects.create(**validated_data)
+        recruiter = validated_data.pop('recruiter', None)  # Extract recruiter data
+        job_post = JobPost.objects.create(recruiter=recruiter, **validated_data)  # Create JobPost with recruiter
         
         if application_data:
             application_serializer = ApplicationSerializer(data=application_data)
@@ -76,6 +76,8 @@ class JobPostSerializer(serializers.ModelSerializer):
             job_post.save()
         
         return job_post
+
+    
 
     
 

@@ -20,10 +20,29 @@ class PostJob(generics.GenericAPIView, mixins.CreateModelMixin):
     serializer_class = serializers.JobPostSerializer
 
     def post(self, request, *args, **kwargs):
+        # Extract recruiter_id from request data
+        recruiter_id = request.data.get('recruiter_id')
+
+        # Ensure recruiter_id is not None
+        if recruiter_id is None:
+            return Response({"recruiter_id": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            # Check if the Recruiter with the given ID exists
+            recruiter = Recruiter.objects.get(pk=recruiter_id)
+        except Recruiter.DoesNotExist:
+            return Response({"recruiter_id": ["Recruiter with the given ID does not exist."]}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Assign the recruiter_id to the request data
+        request.data['recruiter'] = recruiter_id
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-
+        self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def perform_create(self, serializer):
+        serializer.save()
 
 
 
@@ -34,6 +53,7 @@ class ShowJobs(generics.GenericAPIView, mixins.ListModelMixin):
 
     def get_queryset(self):
         recruiter = get_object_or_404(Recruiter, pk=self.request.data['recruiter_id'])
+        print(recruiter.id)
         return JobPost.objects.filter(recruiter=recruiter)
 
     def get(self, request):
@@ -46,8 +66,8 @@ class ShowApplicants(generics.GenericAPIView, mixins.ListModelMixin):
 
     def get_queryset(self):
         job_id = self.kwargs['job_id']
-        job = get_object_or_404(JobPost, pk=job_id)
-        return Applied.objects.filter(application=job.application)
+        get_object_or_404(JobPost, pk=job_id)
+        return Applied.objects.filter(jobPost=job_id)
 
     def get(self, request, job_id):
         return self.list(request)

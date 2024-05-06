@@ -41,6 +41,7 @@ class JobPost(models.Model):
 class Applied(models.Model):
     recruiter = models.ForeignKey(Recruiter, related_name='applies_from', on_delete=models.CASCADE)
     applicant = models.ForeignKey(Applicant, related_name='applied_for', on_delete=models.CASCADE)
+    jobPost = models.ForeignKey(JobPost, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
 
 
