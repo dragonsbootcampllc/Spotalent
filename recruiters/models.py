@@ -10,17 +10,24 @@ class Recruiter(models.Model):
     date_of_birth = models.DateField()
 
 
-class Question(models.Model):
-    question = models.TextField()
-    answer = models.TextField(null=True, blank=True)
-    answered = models.BooleanField(default=False)
-    q_type = models.CharField(max_length=100)
 
 
 
 class Application(models.Model):
     recruiter = models.ForeignKey(Recruiter, related_name='applications', on_delete=models.CASCADE)
-    questions = models.ForeignKey(Question, related_name='questions', on_delete=models.CASCADE)
+
+
+class Question(models.Model):
+    question = models.TextField()
+    application = models.ForeignKey(Application, related_name='questions', on_delete=models.CASCADE)
+    q_type = models.CharField(max_length=100, null=True, blank=True)
+
+
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question, related_name='answers', on_delete=models.CASCADE)
+    answer = models.CharField(max_length=250)
+
 
 
 class Category(models.Model):
@@ -32,8 +39,9 @@ class JobPost(models.Model):
     category = models.ForeignKey(Category, related_name='posts', on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     description = models.TextField()
-    candidates_number = models.IntegerField()
-    application = models.OneToOneField(Application, related_name='application', on_delete=models.SET_NULL, null=True)
+    candidates_number = models.IntegerField(default=0)
+    is_application = models.BooleanField(default=False)
+    application = models.OneToOneField(Application, related_name='application', on_delete=models.SET_NULL, null=True, blank=True)
     active = models.BooleanField(default=True)
 
 

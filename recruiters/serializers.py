@@ -64,33 +64,28 @@ class ApplicationSerializer(serializers.ModelSerializer):
 
 
 class JobPostSerializer(serializers.ModelSerializer):
-    recruiter_id = serializers.PrimaryKeyRelatedField(queryset=Recruiter.objects.all(), source='recruiter')
-    application = ApplicationSerializer() 
 
     class Meta:
         model = JobPost
         fields = ['id', 'recruiter_id', 'category', 'name', 'description', 'candidates_number', 'application', 'active']
     
-    def create(self, validated_data):
-        application_data = validated_data.pop('application', None)
-        recruiter = validated_data.pop('recruiter', None) 
+    # def create(self, validated_data):
+    #     application_data = validated_data.pop('application', None)
+    #     recruiter = validated_data.pop('recruiter', None)  # Extract recruiter data
+    #     job_post = JobPost.objects.create(recruiter=recruiter, **validated_data)  # Create JobPost with recruiter
         
-        if recruiter:
-            validated_data['recruiter_id'] = recruiter.pk  # Pass the recruiter's primary key value
+    #     if application_data:
+    #         application_serializer = ApplicationSerializer(data=application_data)
+    #         application_serializer.is_valid(raise_exception=True)
+    #         application = application_serializer.save()
+    #         job_post.application = application
+    #         job_post.save()
         
-        job_post = JobPost.objects.create(**validated_data) 
-        
-        if application_data:
-            print(recruiter)
-            application_serializer = ApplicationSerializer(data=application_data,context={'recruiter': recruiter.pk})
-            application_serializer.is_valid(raise_exception=True)
+    #     return job_post
 
-            application = application_serializer.save(recruiter_id=recruiter.pk)  # Pass the recruiter's primary key value directly
-            job_post.application = application
-        
-        job_post.save()
-        return job_post
+    
 
+    
 
 class AppliedSerializer(serializers.ModelSerializer):
     class Meta:

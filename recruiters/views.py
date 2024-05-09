@@ -2,8 +2,10 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework.response import Response
 from rest_framework import status
-from recruiters.models import Recruiter, Question, Category, JobPost, Applied,Interview,Application
+from recruiters.models import Recruiter, Question, Category, JobPost, Applied \
+        ,Application, Interview,Application
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 from recruiters import serializers
 from rest_framework import generics
@@ -21,26 +23,25 @@ class PostJob(generics.GenericAPIView, mixins.CreateModelMixin):
 
     def post(self, request, *args, **kwargs):
         # Extract recruiter_id from request data
-        recruiter_id = request.data.get('recruiter_id')
-
-        # Ensure recruiter_id is not None
-        if recruiter_id is None:
-            return Response({"recruiter_id": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
+        recruiter_id = request.user
 
         try:
             # Check if the Recruiter with the given ID exists
-            recruiter = Recruiter.objects.get(pk=recruiter_id)
+            recruiter = get_object_or_404(Recruiter, pk=1)
         except Recruiter.DoesNotExist:
             return Response({"recruiter_id": ["Recruiter with the given ID does not exist."]}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Assign the recruiter_id to the request data
-        request.data['recruiter'] = recruiter_id
-        request.data['application'] = {
-            'recruiter': recruiter_id,
-            'questions': request.data['application'].pop('questions')
-            }
-
-        serializer = self.get_serializer(data=request.data)
+        
+        data = request.data.copy()
+        if data['is_application'] :
+            app = Application.objects.create(recruiter=recruiter)
+            for question in data['application']:
+                qus = Question.objects.create(question=question, application=app)
+                
+        
+        data['application'] = app.id
+        data['recruiter'] = 1
+        serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
