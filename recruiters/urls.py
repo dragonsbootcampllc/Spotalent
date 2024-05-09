@@ -16,4 +16,7 @@ urlpatterns = [
     path('showInterviews/<int:job_id>/',view=views.ShowInterviews.as_view()),
     path('addCategory/',view=views.AddCategory.as_view()),
     path('getCategories/',view=views.GetCategories.as_view()),
+    path('showQuestions/',view=views.ShowQuestions.as_view()),
+    path('createApplication/',view=views.CreateApplication.as_view()),
+    path('createQuestion/',view=views.CreateQuestion.as_view()),
 ]

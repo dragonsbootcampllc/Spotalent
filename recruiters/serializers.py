@@ -38,48 +38,59 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id','name']
 
 class ApplicationSerializer(serializers.ModelSerializer):
+    # recruiter = serializers.PrimaryKeyRelatedField(queryset=Recruiter.objects.all())
     questions = QuestionSerializer(many=True)
+
     class Meta:
         model = Application
-        fields = ['recruiter', 'questions']
-
-    def create(self, validated_data):
-        questions_data = validated_data.pop('questions')
-        recruiter = self.context['request'].user.recruiter 
-        application = Application.objects.create(recruiter=recruiter, **validated_data) 
-        for question_data in questions_data:
-            Question.objects.create(application=application, **question_data)
-        return application
+        fields = ['id', 'recruiter', 'questions'] 
+    
+    # def create(self, validated_data):
+    #     questions_data = validated_data.pop('questions', None)
+    #     print(questions_data)
+    #     recruiter = validated_data.pop('recruiter', None)
+        
+    #     application = Application.objects.create(recruiter=recruiter)
+        
+    #     if questions_data:
+    #         for question_data in questions_data:
+    #             question = Question.objects.create(**question_data)
+    #             application.questions.add(question)
+        
+    #     application.save()
+    #     return application
 
 
 
 
 class JobPostSerializer(serializers.ModelSerializer):
-    recruiter = serializers.PrimaryKeyRelatedField(queryset=Recruiter.objects.all(), required=False)
-    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), required=False)
-    application = ApplicationSerializer(write_only=True)
+    recruiter_id = serializers.PrimaryKeyRelatedField(queryset=Recruiter.objects.all(), source='recruiter')
+    application = ApplicationSerializer() 
 
     class Meta:
         model = JobPost
-        fields = ['id','recruiter', 'category', 'name', 'description', 'candidates_number', 'application', 'active']
+        fields = ['id', 'recruiter_id', 'category', 'name', 'description', 'candidates_number', 'application', 'active']
     
     def create(self, validated_data):
         application_data = validated_data.pop('application', None)
-        recruiter = validated_data.pop('recruiter', None)  # Extract recruiter data
-        job_post = JobPost.objects.create(recruiter=recruiter, **validated_data)  # Create JobPost with recruiter
+        recruiter = validated_data.pop('recruiter', None) 
+        
+        if recruiter:
+            validated_data['recruiter_id'] = recruiter.pk  # Pass the recruiter's primary key value
+        
+        job_post = JobPost.objects.create(**validated_data) 
         
         if application_data:
-            application_serializer = ApplicationSerializer(data=application_data)
+            print(recruiter)
+            application_serializer = ApplicationSerializer(data=application_data,context={'recruiter': recruiter.pk})
             application_serializer.is_valid(raise_exception=True)
-            application = application_serializer.save()
+
+            application = application_serializer.save(recruiter_id=recruiter.pk)  # Pass the recruiter's primary key value directly
             job_post.application = application
-            job_post.save()
         
+        job_post.save()
         return job_post
 
-    
-
-    
 
 class AppliedSerializer(serializers.ModelSerializer):
     class Meta:

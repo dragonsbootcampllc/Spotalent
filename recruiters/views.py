@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework.response import Response
 from rest_framework import status
-from recruiters.models import Recruiter, Question, Category, JobPost, Applied,Interview
+from recruiters.models import Recruiter, Question, Category, JobPost, Applied,Interview,Application
 from django.contrib.auth.models import User
 
 from recruiters import serializers
@@ -35,6 +35,10 @@ class PostJob(generics.GenericAPIView, mixins.CreateModelMixin):
 
         # Assign the recruiter_id to the request data
         request.data['recruiter'] = recruiter_id
+        request.data['application'] = {
+            'recruiter': recruiter_id,
+            'questions': request.data['application'].pop('questions')
+            }
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -125,17 +129,50 @@ class ShowQuestions(generics.GenericAPIView, mixins.ListModelMixin):
     serializer_class = serializers.QuestionSerializer
 
     def get_queryset(self):
-        recruiter = Recruiter.objects.get(user=self.request.user)
-        return Question.objects.filter(application__recruiter=recruiter)
+        # recruiter = self.request.data.get('recruiter_id')
+        return Question.objects.all()
 
     def get(self, request):
         return self.list(request)
     
 
 
+# create a new application 
+class CreateApplication(generics.CreateAPIView):
+    serializer_class = serializers.ApplicationSerializer
+
+    def post(self, request, *args, **kwargs):
+        # Extract recruiter_id from request data
+        recruiter_id = request.data.get('recruiter')
+
+        # Ensure recruiter_id is not None
+        if recruiter_id is None:
+            return Response({"recruiter_id": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            # Check if the Recruiter with the given ID exists
+            recruiter = Recruiter.objects.get(pk=recruiter_id)
+        except Recruiter.DoesNotExist:
+            return Response({"recruiter_id": ["Recruiter with the given ID does not exist."]}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Assign the recruiter_id to the request data
+        request.data['recruiter'] = recruiter_id
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+    def perform_create(self, serializer):
+        # Set the recruiter based on the authenticated user or any other logic you have
+        recruiter = get_object_or_404(Recruiter, pk=self.request.data.get('recruiter'))
+        serializer.save(recruiter=recruiter)
 
 
 
+class CreateQuestion(generics.CreateAPIView):
+    serializer_class = serializers.QuestionSerializer
 
 
 
