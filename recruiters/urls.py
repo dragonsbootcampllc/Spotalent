@@ -3,20 +3,21 @@ from recruiters import views
 
 
 urlpatterns = [
-    path('createRecruiter/',view=views.CreateRecruiter.as_view()),
-    path('recruiter/',view=views.ShowRecruiters.as_view()),
-    path('users/<int:pk>',view=views.GetUesr.as_view()),
-    path('users/',view=views.GetUsers.as_view()),
-    path('postJob/',view=views.PostJob.as_view()),
-    path('showJobs/',view=views.ShowJobs.as_view()),
-    path('showApplicants/<int:job_id>/',view=views.ShowApplicants.as_view()),
-    path('scheduleInterview/<int:applied_id>',view=views.ScheduleInterview.as_view()),
-    path('approveApplicant/',view=views.ApproveApplicant.as_view()),
-    path('rejectApplicant/',view=views.RejectApplicant.as_view()),
-    path('showInterviews/<int:job_id>/',view=views.ShowInterviews.as_view()),
-    path('addCategory/',view=views.AddCategory.as_view()),
-    path('getCategories/',view=views.GetCategories.as_view()),
-    path('showQuestions/',view=views.ShowQuestions.as_view()),
-    path('createApplication/',view=views.CreateApplication.as_view()),
-    path('createQuestion/',view=views.CreateQuestion.as_view()),
+    path('/',view=views.GetCreateRecruiters.as_view()),                            # show all recruiters & create a new recruiter
+    path('/job',view=views.GetCreatePostJob.as_view()),                                     # show all jobs & post a job 
+    path('/job/<int:job_id>/interviews',view=views.GetJobInterviews.as_view()),             # show all jobs & post a job 
+    
+    path('/job/<int:pk>/applicant',view=views.ShowApplicants.as_view()),                    # show all applicants for a job
+    path('/job/applied/<int:pk>/applicant',view=views.UpdateApplicantStats.as_view()),             # approve an applicant
+    
+    path('/interview/schedule/<int:applied_id>',view=views.ScheduleInterview.as_view()),    # schedule an interview
+    path('/interview/<int:pk>',view=views.ShowInterviews.as_view()),                    # show Interviews with job_id
+    path('/interview/',view=views.GetAllInterviews.as_view()),                    # show Interviews with job_id
+    
+    path('/category',view=views.GetCreateCategory.as_view()),                               # show all categories & create a new category
+    path('/question',view=views.ShowQuestions.as_view()),                                   # show all questions
+    # path('user/<int:pk>',view=views.GetUesr.as_view()),
+    # path('user/',view=views.GetUsers.as_view()),
+    # path('createApplication/',view=views.CreateApplication.as_view()),
+    # path('createQuestion/',view=views.CreateQuestion.as_view()),
 ]

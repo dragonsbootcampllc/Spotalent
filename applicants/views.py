@@ -5,7 +5,7 @@ from rest_framework import status
 from django.http import Http404
 
 from applicants.models import Applicant
-from recruiters.models import JobPost, Application, Applied
+from recruiters.models import JobPost, Application, Applied , Answer
 
 from recruiters import serializers as Recruiter_serializers
 from applicants import serializers as Applicant_serializers
@@ -18,23 +18,39 @@ from rest_framework import permissions
 
 
 # create Applicant 
-class CreateApplicant(generics.CreateAPIView):
+class GetCreateApplicant(generics.CreateAPIView,generics.ListAPIView):
+    queryset = Applicant.objects.all()
     serializer_class = Applicant_serializers.ApplicantSerializer
 
 # apply for a posted job
 class ApplyJob(generics.CreateAPIView):
-    queryset = JobPost.objects.all()
-    serializer_class = Recruiter_serializers.JobPostSerializer
 
     def post(self, request, *args, **kwargs):
+        data = request.data.copy()
+
+        applicant = get_object_or_404(Applicant,pk=data['user_id'])
+
         job_id = self.kwargs.get('job_id')
         try:
             job = get_object_or_404(JobPost,id=job_id)
         except JobPost.DoesNotExist:
             raise Http404("Job does not exist")
         
-        applicant = get_object_or_404(Applicant,pk=request.data.get('user_id'))
-        applied = Applied.objects.create(applicant=applicant,recruiter=job.recruiter)
+        applied = Applied.objects.filter(applicant=applicant, jobPost=job)
+        if applied.exists():
+            return Response({"message": "You have already applied for this job"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if job.is_application:            
+            application = data['application']
+            if application is not None:
+                for question in application:
+                    answer = Answer.objects.create(question=question,answer=question['answer'],applicant=data['user_id'])
+            else:
+                return Response({"message": "Application is required"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            data['application'] = None
+        
+        applied = Applied.objects.create(applicant=applicant,jobPost=job)
         applied.save()
         return Response({"message": "Applied successfully"}, status=status.HTTP_201_CREATED)
     
@@ -54,8 +70,3 @@ class ShowAppliedJobs(generics.ListAPIView, mixins.RetrieveModelMixin):
         applied_jobs = self.filter_queryset(self.get_queryset().filter(applicant=applicant))
         serializer = self.get_serializer(applied_jobs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
-# show all applicants
-class ShowApplicants(generics.ListAPIView, mixins.RetrieveModelMixin):
-    queryset = Applicant.objects.all()
-    serializer_class = Applicant_serializers.ApplicantSerializer
