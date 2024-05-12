@@ -13,6 +13,8 @@ from applicants import serializers as Applicant_serializers
 from rest_framework import generics
 from rest_framework import mixins
 from rest_framework import permissions
+
+from django.db import transaction
 # Create your views here.
 
 
@@ -47,18 +49,14 @@ class ApplyJob(generics.CreateAPIView):
                     # questions for the application 
                     questions = Question.objects.filter(application=job.application)
                     ids = list(questions.values_list('id', flat=True))
-                    applied = Applied.objects.create(applicant=applicant, jobPost=job)
-                    for question_id,answer in application.items():
-                        if int(question_id) in ids:
-                            try:
+                    with transaction.atomic():
+                        applied = Applied.objects.create(applicant=applicant, jobPost=job)
+                        for question_id, answer in application.items():
+                            if int(question_id) in ids:
                                 question = get_object_or_404(Question, id=question_id)
                                 answer = Answer.objects.create(question=question,answer=answer,applied=applied)
-                            except Exception as e:
-                                print(e)
-                                applied.delete()
-                                return Response({"message": "Question id is not found"}, status=status.HTTP_400_BAD_REQUEST)
-                        else: 
-                            return Response({"message": "An error has oocured"}, status=status.HTTP_400_BAD_REQUEST)
+                            else:
+                                return Response({"message": "An error has oocured"}, status=status.HTTP_400_BAD_REQUEST)
                 else:
                     return Response({"message": "Application is required"}, status=status.HTTP_400_BAD_REQUEST)
             else:
