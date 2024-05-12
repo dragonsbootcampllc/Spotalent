@@ -46,8 +46,9 @@ class ApplyJob(generics.CreateAPIView):
                 if application is not None:
                     # questions for the application 
                     questions = Question.objects.filter(application=job.application).values("id")
+                    ids = [item['id'] for item in questions]
                     for question_id,answer in application.items():
-                        if question_id in questions:
+                        if question_id in ids:
                             try:
                                 answer = Answer.objects.create(question=question_id,answer=answer,applied=applied)
                             except Answer.DoesNotExist:
