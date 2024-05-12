@@ -45,21 +45,24 @@ class ApplyJob(generics.CreateAPIView):
                 
                 if application is not None:
                     # questions for the application 
-                    questions = Question.objects.filter(application=job.application).values("id")
-                    ids = [item['id'] for item in questions]
+                    questions = Question.objects.filter(application=job.application)
+                    ids = list(questions.values_list('id', flat=True))
+                    applied = Applied.objects.create(applicant=applicant, jobPost=job)
                     for question_id,answer in application.items():
-                        if question_id in ids:
+                        if int(question_id) in ids:
                             try:
-                                answer = Answer.objects.create(question=question_id,answer=answer,applied=applied)
-                            except Answer.DoesNotExist:
+                                question = get_object_or_404(Question, id=question_id)
+                                answer = Answer.objects.create(question=question,answer=answer,applied=applied)
+                            except Exception as e:
+                                print(e)
+                                applied.delete()
                                 return Response({"message": "Question id is not found"}, status=status.HTTP_400_BAD_REQUEST)
+                        else: 
+                            return Response({"message": "An error has oocured"}, status=status.HTTP_400_BAD_REQUEST)
                 else:
                     return Response({"message": "Application is required"}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 data['application'] = None
-            
-            applied = Applied.objects.create(applicant=applicant,jobPost=job)
-            applied.save()
             return Response({"message": "Applied successfully"}, status=status.HTTP_201_CREATED)
     
 
