@@ -34,7 +34,6 @@ class GetCreatePostJob(generics.GenericAPIView, mixins.CreateModelMixin, mixins.
         except Recruiter.DoesNotExist:
             return Response({"recruiter_id": ["Recruiter with the given ID does not exist."]}, status=status.HTTP_400_BAD_REQUEST)
 
-        
         if data['is_application'] :
             try:
                 if data['application'] is None or data['application'] == []:
@@ -43,11 +42,9 @@ class GetCreatePostJob(generics.GenericAPIView, mixins.CreateModelMixin, mixins.
                 return Response({"application": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
             
             app = Application.objects.create(recruiter=recruiter)
-            app.save()
 
             for ques in data['application']:
-                question, _ = Question.objects.get_or_create(question=ques)
-                app.questions.add(question)
+                question = Question.objects.create(question=ques,application=app)
 
             data['application'] = app.id
         else:
@@ -153,7 +150,6 @@ class ScheduleInterview(generics.CreateAPIView,generics.UpdateAPIView):
 
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
 
         return self.create(serializer)
     

@@ -5,7 +5,7 @@ from rest_framework import status
 from django.http import Http404
 
 from applicants.models import Applicant
-from recruiters.models import JobPost, Application, Applied , Answer
+from recruiters.models import JobPost, Application, Applied , Answer,Question
 
 from recruiters import serializers as Recruiter_serializers
 from applicants import serializers as Applicant_serializers
@@ -39,21 +39,29 @@ class ApplyJob(generics.CreateAPIView):
         applied = Applied.objects.filter(applicant=applicant, jobPost=job)
         if applied.exists():
             return Response({"message": "You have already applied for this job"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        if job.is_application:            
-            application = data['application']
-            if application is not None:
-                for question in application:
-                    answer = Answer.objects.create(question=question,answer=question['answer'],applicant=data['user_id'])
-            else:
-                return Response({"message": "Application is required"}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            data['application'] = None
-        
-        applied = Applied.objects.create(applicant=applicant,jobPost=job)
-        applied.save()
-        return Response({"message": "Applied successfully"}, status=status.HTTP_201_CREATED)
+            if job.is_application:
+                application = data.get('application')
+                
+                if application is not None:
+                    # questions for the application 
+                    questions = Question.objects.filter(application=job.application).values("id")
+                    for question_id,answer in application.items():
+                        if question_id in questions:
+                            try:
+                                answer = Answer.objects.create(question=question_id,answer=answer,applied=applied)
+                            except Answer.DoesNotExist:
+                                return Response({"message": "Question id is not found"}, status=status.HTTP_400_BAD_REQUEST)
+                else:
+                    return Response({"message": "Application is required"}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                data['application'] = None
+            
+            applied = Applied.objects.create(applicant=applicant,jobPost=job)
+            applied.save()
+            return Response({"message": "Applied successfully"}, status=status.HTTP_201_CREATED)
     
+
 # show all the jobs
 class ShowJobs(generics.ListAPIView, mixins.RetrieveModelMixin):
     queryset = JobPost.objects.all()

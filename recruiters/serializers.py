@@ -30,7 +30,7 @@ class RecruiterSerializer(serializers.ModelSerializer):
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ['question','q_type']
+        fields = ['question','q_type','application']
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -50,7 +50,7 @@ class JobPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = JobPost
-        fields = ['id', 'recruiter', 'category', 'name', 'description', 'candidates_number', 'application', 'active']
+        fields = ['id', 'recruiter', 'category', 'name', 'description', 'candidates_number', 'application', 'active','is_application']
 
     
 class AppliedSerializer(serializers.ModelSerializer):

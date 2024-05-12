@@ -12,17 +12,11 @@ class Recruiter(models.Model):
 
 class Application(models.Model):
     recruiter = models.ForeignKey(Recruiter, related_name='applications', on_delete=models.CASCADE)
-    questions = models.ManyToManyField('Question', related_name='applications')
 
 class Question(models.Model):
     question = models.TextField()
+    application = models.ForeignKey(Application, related_name='questions',on_delete=models.CASCADE)
     q_type = models.CharField(max_length=100, null=True, blank=True)
-
-
-class Answer(models.Model):
-    question = models.OneToOneField(Question, related_name='answers', on_delete=models.CASCADE)
-    answer = models.CharField(max_length=250)
-    applicant = models.OneToOneField(Applicant, related_name='answers', on_delete=models.CASCADE)
 
 
 class Category(models.Model):
@@ -45,8 +39,14 @@ class Applied(models.Model):
     jobPost = models.ForeignKey(JobPost, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
 
+
 class Interview(models.Model):
     applied = models.ForeignKey(Applied, related_name='interviews', on_delete=models.CASCADE)
     date = models.DateTimeField()
     attended = models.BooleanField(default=False)
     cancelled = models.BooleanField(default=False)
+
+class Answer(models.Model):
+    question = models.OneToOneField(Question, related_name='answers', on_delete=models.CASCADE)
+    answer = models.CharField(max_length=250)
+    applied = models.ForeignKey(Applied, related_name='applicant_answer', on_delete=models.CASCADE)
