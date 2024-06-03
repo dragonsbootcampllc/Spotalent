@@ -3,3 +3,6 @@ env/
 db.sqlite3
 applicants/migrations
 recruiters/migrations
+docker-compose.yml
+Dockerfile
+.dockerignore

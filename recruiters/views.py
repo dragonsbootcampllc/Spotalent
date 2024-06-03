@@ -61,7 +61,6 @@ class GetCreatePostJob(generics.GenericAPIView, mixins.CreateModelMixin, mixins.
 
     def get_queryset(self):
         recruiter = get_object_or_404(Recruiter, pk=self.request.data['recruiter_id'])
-        print(recruiter.id)
         return JobPost.objects.filter(recruiter=recruiter)
 
     def get(self, request):
