@@ -1,3 +1,5 @@
+// JobsView.jsx
+import React from 'react';
 import data from '../../Data/JobsView.json';
 
 interface Job {
@@ -13,11 +15,11 @@ interface Job {
 
 const JobsView: React.FC = () => {
     return (
-        <div className='container mx-auto max-w-[800px] py-4 px-4 sm:px-6 lg:px-8'>
-            <div className="text-purple-200 font-bold text-3xl mb-6">
-                <h1 className='text-[clamp(1.5rem,4vw,2rem)]'>Jobs you might be interested in</h1>
+        <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg">
+            <div className="p-6 border-b border-gray-200">
+                <h1 className="text-2xl font-semibold text-gray-800">Jobs You Might Be Interested In</h1>
             </div>
-            <div>
+            <div className="p-6">
                 {data ? (
                     <div>
                         {data.map(({
@@ -32,20 +34,19 @@ const JobsView: React.FC = () => {
                         }: Job, index: number) => (
                             <div
                                 key={index}
-                                className="mb-8 p-6 bg-gradient-to-r from-purple-700 to-purple-500 shadow-lg rounded-lg hover:scale-105 transition-transform"
-                                style={{ transform: 'scale(1)' }}
+                                className="mb-6 p-6 bg-gradient-to-r from-purple-700 to-purple-500 text-white shadow-md rounded-lg transition-transform transform hover:scale-105"
                             >
                                 <div className="mb-4">
-                                    <h1 className='text-white font-semibold text-xl'>{Jobtitle}</h1>
-                                    <p className='text-xs text-purple-300'>{timeOfPost}</p>
-                                    <p className='text-xs text-purple-200'>{NumOfCandidates} candidates</p>
+                                    <h2 className='text-xl font-semibold'>{Jobtitle}</h2>
+                                    <p className='text-sm text-purple-200'>{timeOfPost}</p>
+                                    <p className='text-sm text-purple-300'>{NumOfCandidates} candidates</p>
                                 </div>
-                                <div className='py-3 text-purple-100'>
-                                    {JobDescription.length > 230
-                                        ? JobDescription.slice(0, 230) + "..."
+                                <p className='py-3 text-purple-100'>
+                                    {JobDescription.length > 200
+                                        ? JobDescription.slice(0, 200) + "..."
                                         : JobDescription}
-                                </div>
-                                <div className='flex flex-wrap gap-2'>
+                                </p>
+                                <div className='flex flex-wrap gap-2 mb-4'>
                                     {JobType.map((job, index) => (
                                         <span
                                             key={index}
@@ -55,8 +56,8 @@ const JobsView: React.FC = () => {
                                         </span>
                                     ))}
                                 </div>
-                                <div className='flex flex-col md:flex-row border-t border-purple-400/20 justify-between items-start md:items-center py-4 mt-4'>
-                                    <div className='flex flex-col sm:flex-row gap-4 md:gap-10'>
+                                <div className='flex flex-col md:flex-row justify-between items-start md:items-center border-t border-purple-400/20 pt-4'>
+                                    <div className='flex flex-col sm:flex-row gap-4'>
                                         <div className='text-sm text-purple-100'>{Salary}</div>
                                         <div className='text-sm text-purple-100'>{Location}</div>
                                     </div>
@@ -65,10 +66,11 @@ const JobsView: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                        )
+                    )}
                     </div>
                 ) : (
-                    <p className='text-purple-200'>Loading data...</p>
+                    <p className='text-gray-600'>Loading data...</p>
                 )}
             </div>
         </div>
