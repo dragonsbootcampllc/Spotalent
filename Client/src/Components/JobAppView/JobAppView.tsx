@@ -24,12 +24,12 @@ interface Recruiter {
 
 const JobsView: React.FC = () => {
     return (
-        <div className='container bg-gradient-to-r from-purple-700 to-purple-500 shadow-lg rounded-lg grid grid-cols-5 mx-auto py-4 px-4 sm:px-6 lg:px-8'>
+        <div className='container bg-gradient-to-r from-purple-700 to-purple-500 shadow-lg  grid grid-cols-5 mx-auto py-4 px-4 sm:px-6 lg:px-8'>
             <div className="jobData col-span-3">
                 {data ? (
                     <div>
                         {data.map(({ jobData: { Jobtitle, Skills, timeOfPost, JobDescription, Salary, JobType, NumOfCandidates, NumOfApplaiers, Location } }, index: number) => (
-                            <div key={index} className="mb-8 p-6 rounded-lg">
+                            <div key={index} className=" p-6">
                                 <div className="head flex flex-col md:flex-row border-b border-purple-400/80 justify-between items-start md:items-center py-4 mt-4'">
                                     <div className="left">
                                         <h1 className='text-white font-semibold text-xl'>{Jobtitle}</h1>
@@ -54,14 +54,18 @@ const JobsView: React.FC = () => {
                                         </div>
                                     ))}
                                 </div>
-
-                                {Skills.map((skill, index) => (
-                                    <div key={index} className='flex py-4 mt-4'>
-                                        <span className='px-[16px] py-1 w-full sm:w-[140px] h-[40px] text-sm rounded-[20px] font-semibold bg-purple-200 text-purple-800 text-center'>
-                                            {skill}
-                                        </span>
+                                <div className="cont">
+                                    <h2 className='text-white '>Skills</h2>
+                                    <div className="all flex flex-wrap py-4 gap-2 ">
+                                        {Skills.map((skill, index) => (
+                                            <div key={index} className=''>
+                                                <span className='px-[16px] py-1 w-[140px] h-[40px] text-sm rounded-[20px] font-semibold bg-purple-200 text-purple-800 text-center'>
+                                                    {skill}
+                                                </span>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -69,19 +73,19 @@ const JobsView: React.FC = () => {
                     <p className='text-purple-200'>Loading data...</p>
                 )}
             </div>
-            <div className="RecruiterData col-span-2">
+            <div className="RecruiterData col-span-2 border-l border-purple-400/80">
                 {data ? (
                     <div>
                         {data.map(({ RecruiterData: { Company, CompanyLogo, CompanyType, CompanyIndustry, CompanyLocation, CompanyWebsite } }, index: number) => (
-                            <div key={index} className="mb-8 p-6">
-                                <div className="head flex flex-col md:flex-row border-b border-purple-400/40 justify-between items-start md:items-center py-4 mt-4'">
+                            <div key={index} className=" p-6">
+                                <div className="head flex flex-col md:flex-row justify-between items-start md:items-center py-4 mt-4'">
                                     <div className="left">
                                         <h1 className='text-white font-semibold text-xl'>{Company}</h1>
                                         <p className='text-[12px] text-purple-300'>{CompanyType}</p>
                                     </div>
                                     <div className='right text-sm text-purple-300 font-semibold mt-2 md:mt-0'>{CompanyIndustry}</div>
                                 </div>
-                                <div className='py-3 text-purple-100 border-b border-purple-400/40'>
+                                <div className='py-3 text-purple-100 '>
                                     <img src={CompanyLogo} alt={Company} className='w-24 h-24 rounded-full' />
                                 </div>
                                 <div className='text-sm text-purple-100 mt-4'>

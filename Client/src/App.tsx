@@ -2,7 +2,7 @@ import JobAppView from './Components/JobAppView/JobAppView'
 function App() {
 
   return (
-    <div className="bg-purple-950">
+    <div className="">
       <JobAppView />
     </div>
   )
