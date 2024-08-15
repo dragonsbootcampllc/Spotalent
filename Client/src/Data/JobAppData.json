@@ -24,13 +24,15 @@
             ]
         },
         "RecruiterData": {
-            "Company": "Company Name",
-            "CompanyLogo": "https://via.placeholder.com/150",
+            "RecruiterName": "Recruiter Name",
+            "RecruiterPosition": "Recruiter Position",
+            "RecruiterLogo": "https://via.placeholder.com/150",
             "CompanySize": "100-500 employees",
-            "CompanyType": "Private",
+            "CompanyName": "Company Name",
+            "RecruiterType": "Private",
             "CompanyIndustry": "Information Technology",
             "CompanyLocation": "Germany",
-            "CompanyWebsite": "https://www.companywebsite.com"
+            "NumOfPosts": "33"
         }
     }
 ]
