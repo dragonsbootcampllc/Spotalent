@@ -1,9 +1,16 @@
 
+
 function App() {
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 py-8">
-    </div>
+
+    <>
+      Hi
+      <Profile />
+      <div className="bg-blue-500 text-white p-4">
+        Welcome to my app!
+      </div>
+    </>
 
   )
 }
