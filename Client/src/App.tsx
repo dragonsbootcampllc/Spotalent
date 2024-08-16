@@ -1,8 +1,9 @@
-import Profile from "./Component/profile/Profile"
+
 
 function App() {
 
   return (
+
     <>
       Hi
       <Profile />
@@ -10,6 +11,7 @@ function App() {
         Welcome to my app!
       </div>
     </>
+
   )
 }
 
