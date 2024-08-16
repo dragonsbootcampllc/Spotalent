@@ -1,12 +1,21 @@
+import Profile from "./components/Profile/Profile"
 
 function App() {
 
   return (
     <>
-      Hi
-      <div className="bg-blue-500 text-white p-4">
-        Welcome to my app!
-      </div>
+<Profile
+      name="First last name"
+      jobTilte="Web developer"
+      profileImage="https://via.placeholder.com/150"
+      bio="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum."
+      country="Egypt"
+      experience="5 years in web development"
+      certificates={["Certified React Developer", "Certified JavaScript Specialist"]}
+      projects={["E-commrence cross platform ", "E-commrence cross platform ", "E-commrence cross platform "]}
+      skills={["JavaScript", "React", "TypeScript", "CSS", "HTML"]}
+      cvLink="https://example.com/john-doe-cv.pdf"
+    />
     </>
   )
 }
