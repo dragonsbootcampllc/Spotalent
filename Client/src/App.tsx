@@ -1,4 +1,3 @@
-import JobsView from './Components/JobsView/Jobsview'
 function App() {
 
   return (
