@@ -1,5 +1,5 @@
 import "./Styles/index.css";
-import ApplicationForm from "./components/Form";
+import ApplicationForm from "./Components/Form";
 
 function App() {
   return (

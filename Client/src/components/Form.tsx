@@ -44,17 +44,17 @@ function ApplicationForm() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto my-10 p-8 bg-white rounded-lg shadow-lg relative">
-      <div className="flex  items-center justify-center mb-4 border-b-2 pb-2">
+    <div className="max-w-3xl mx-auto my-10 p-8 bg-white rounded-lg shadow-lg">
+      <div className="flex flex-col md:flex-row items-center justify-center mb-4 border-b-2 pb-2">
         <Avatar
           alt="Profile picture"
           className="w-16 h-16 rounded-full"
           src="https://images.unsplash.com/photo-1560800452-f2d475982b96?w=250&h=250&auto=format&fit=crop"
         />
-        <div className="flex ml-4">
+        <div className="flex flex-col gap-2 md:flex-row items-center justify-center ml-0 md:ml-4 mt-4 md:mt-0">
           <Button
             variant="secondary"
-            className="mr-2 px-5 py-2 text-sm bg-gray-600 hover:bg-gray-900 text-white rounded-full"
+            className=" px-5 py-2 text-sm bg-gray-600 hover:bg-gray-900 text-white rounded-full"
           >
             Upload new
           </Button>
@@ -62,11 +62,11 @@ function ApplicationForm() {
             variant="secondary"
             className="px-4 py-2 text-sm bg-gray-400 hover:bg-gray-500 rounded-full"
           >
-            Delete photo
+            delete photo
           </Button>
         </div>
       </div>
-      <div className="w-2/12 ml-auto mb-4">
+      <div className="w-full md:w-2/12 ml-auto mb-4">
         <Button
           variant="secondary"
           className="px-3 py-1 text-sm border-2 hover:bg-slate-600 text-gray-700 hover:text-white rounded"
@@ -75,7 +75,7 @@ function ApplicationForm() {
           Edit
         </Button>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="flex flex-col">
           <label className="text-sm font-medium mb-3">First name</label>
           <Input
@@ -129,7 +129,7 @@ function ApplicationForm() {
 
         <div className="flex flex-col">
           <label className="text-sm font-medium mb-3">Date of birth</label>
-          <div className="flex gap-2">
+          <div className="flex flex-col md:flex-row gap-2">
             <select
               name="day"
               value={formData.dateOfBirth.day}
@@ -161,24 +161,25 @@ function ApplicationForm() {
               {YearOptions()}
             </select>
           </div>
+
         </div>
 
-        <div className="flex flex-col col-span-2">
+        <div className="flex flex-col md:col-span-2">
           <label className="text-sm font-medium mb-3">Address</label>
           <Input
             name="address"
             value={formData.address}
             placeholder="Address"
-            className="rounded p-2 border border-gray-300 w-1/2"
+            className="rounded p-2 border border-gray-300 w-full"
           />
         </div>
       </div>
 
-      <div className="mt-8 pt-4 border-gray-300">
-        <div className="flex justify-between">
+      <div className="mt-8 pt-4 border-t border-gray-300">
+        <div className="flex flex-col md:flex-row justify-between">
           <Button
             variant="secondary"
-            className="px-6 py-2 bg-gray-300 hover:bg-gray-400 rounded-full"
+            className="mb-2 md:mb-0 px-6 py-2 bg-gray-300 hover:bg-gray-400 rounded-full"
           >
             Cancel
           </Button>
