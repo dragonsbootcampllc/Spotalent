@@ -2,6 +2,7 @@ import JobsView from './Components/JobsView/Jobsview';
 import Profile from "./components/Profile/Profile";
 import PrfileData from "./Data/Profile.json";
 
+
 function App() {
 
   return (
@@ -13,6 +14,7 @@ function App() {
       {...PrfileData}
     />
     </>
+
   )
 }
 
