@@ -19,9 +19,10 @@ interface Application {
 const JobsPost = () => {
 
     return (
-        <div className="w-full max-w-full mx-auto bg-white rounded-xl shadow-md shadow-[#d6d1db] flex flex-row">
+       <div className="flex justify-center">
+         <div className="w-full max-w-[1400px] mx-auto bg-white rounded-xl shadow-md shadow-[#d6d1db] flex flex-row">
             <SlideBar />
-            <div className="p-6 w-full sm:pr-20">
+            <div className="p-6 w-full max-w-4xl sm:pr-20">
                 <div>
                     {data.map(
                         (
@@ -113,6 +114,7 @@ const JobsPost = () => {
                 </div>
             </div>
         </div>
+       </div>
     );
 };
 
