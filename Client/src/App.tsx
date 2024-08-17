@@ -1,10 +1,15 @@
-import Profile from "./components/Profile/Profile"
+import JobsView from './Components/JobsView/Jobsview';
+import Profile from "./components/Profile/Profile";
 
 function App() {
 
   return (
     <>
-<Profile
+      Hi
+      <div className="flex justify-center items-center min-h-screen bg-gray-100 py-8">
+      <JobsView />
+      </div>
+      <Profile
       name="First last name"
       jobTilte="Web developer"
       profileImage="https://via.placeholder.com/150"
