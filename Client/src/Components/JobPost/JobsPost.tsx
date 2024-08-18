@@ -1,4 +1,3 @@
-import React from "react";
 import data from "../../Data/JobsPost.json";
 import Dropdown from "./Dropdown";
 import SearchIcon from "../Icons/SearchIcon";
