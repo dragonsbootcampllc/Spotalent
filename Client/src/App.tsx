@@ -1,14 +1,17 @@
-import TrackApps from "./Components/TrackApplications/TrackApps"
+import "./Styles/index.css";
+import ApplicationForm from "./Components/Form";
+
 
 function App() {
-
   return (
 
-    <>
-      <TrackApps />
+    <>    
+      <div>
+        <ApplicationForm />
+      </div>
     </>
+  );
 
-  )
 }
 
-export default App
+export default App;
