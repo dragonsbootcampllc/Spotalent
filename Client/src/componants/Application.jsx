@@ -13,10 +13,10 @@ function FillApplication() {
         <h2 className="font-medium py-2 md:text-xl">
           What where when which How?
         </h2>
-        <input
+        <textarea
           type="text"
           placeholder="Answer here"
-          className="px-4 pt-2 pb-8 w-full border rounded focus:border-gray-300"
+          className="px-4 pt-2 pb-8 w-full border resize-none rounded focus:border-gray-300"
         />
       </div>
       <div>
@@ -82,8 +82,8 @@ function FillApplication() {
         <h2 className="font-medium py-2 md:text-xl">
           Write a python code that represents what where when which How?
         </h2>
-        <input
-          className="px-4 pt-2 pb-8 w-full border rounded"
+        <textarea
+          className="px-4 pt-2 pb-8 w-full border rounded resize-none"
           type="text"
           placeholder="write your code here"
         />
