@@ -26,7 +26,7 @@ const Profile: React.FC<ProfileProps> = ({
   cvLink
 }) => {
   return (
-    <div className="profile p-4 md:p-10 border bg-white border-gray-200 m-4 shadow-lg">
+    <div className="profile p-4 max-w-[1400px] md:p-10 border bg-white border-gray-200 m-4 shadow-lg">
       <div className="flex flex-col md:flex-row md:justify-between border-b-2 pb-4 mb-4">
         <div className="flex items-center gap-4 mb-4 md:mb-0">
           <img
