@@ -151,20 +151,20 @@ const MyJobPosts: React.FC = () => {
         ))}
       </div>
       <div className="md:w-1/4  flex flex-col-reverse md:flex-col bg-white p-6 shadow-md ">
-        <div className="flex  fixed bottom-0 left-0 w-full z-10 bg-white p-4  md:static md:mt-0 items-center space-x-2">
+        <div className="flex  fixed bottom-0 left-0 w-full z-10 bg-white p-4 sm:p-0 md:static md:mt-0 items-center space-x-2">
           <ul className='w-full flex justify-center md:block boorder-none md:border-b-2 border-slate-400 p-0 md:pb-2 '>
-            <li className='p-3 hover:bg-purple-200 cursor-pointer transition duration-300 px-2 py-1 flex gap-1  text-nowrap md:text-base md:text-wrap'>
+            <li className='p-3 hover:bg-purple-200 cursor-pointer transition duration-300 px-2 py-1 flex gap-1  text-nowrap md:text-sm md:text-wrap'>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
                 <path fillRule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clipRule="evenodd" />
               </svg>
               Add a post</li>
-            <li className=' hover:bg-purple-200 cursor-pointer transition duration-300 px-2 py-1 flex gap-1 text-nowrap md:text-base md:text-wrap'>
+            <li className=' hover:bg-purple-200 cursor-pointer transition duration-300 px-2 py-1 flex gap-1 text-nowrap md:text-sm md:text-wrap'>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 md:size-5">
                 <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
               </svg>
 
               Edit a post</li>
-            <li className='transition cursor-pointer duration-300 hover:bg-purple-200 px-2 py-1 flex gap-1  text-nowrap md:text-base md:text-wrap'>
+            <li className='transition cursor-pointer duration-300 hover:bg-purple-200 px-2 py-1 flex gap-1  text-nowrap md:text-sm md:text-wrap'>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
                 <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
               </svg>
@@ -174,11 +174,11 @@ const MyJobPosts: React.FC = () => {
         </div>
         <div className="mt-1 md:mt-6">
           <div className="flex justify-between items-center mb-3">
-            <h2 className="text-lg font-bold">About me</h2>
+            <h2 className="text-base md:text-lg font-bold">About me</h2>
             <a href="#" className='text-sm font-semibold text-gray-500 transition duration-300 hover:text-gray-700 underline me-3' >More</a>
           </div>
           <div className="flex justify-between md:block">
-            <div className="flex-col flex md:flex-row">
+            <div className="flex-col flex lg:flex-row">
              <div className="flex justify-center md:justify-normal">
              <img
                 className="w-16  h-16 text-center rounded-full"

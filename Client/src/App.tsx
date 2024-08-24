@@ -1,3 +1,4 @@
+import MyJobPosts from "./Components/HomePageForRecuiters/MyJobPosts";
 
 
 function App() {
@@ -5,7 +6,7 @@ function App() {
     <>
       <div className="bg-blue-500 text-white p-4">Welcome to my app!</div>
       <div>
-
+<MyJobPosts/>
       </div>
     </>
   );
