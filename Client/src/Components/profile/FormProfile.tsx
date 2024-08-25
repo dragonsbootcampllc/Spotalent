@@ -56,8 +56,8 @@ function FormProfile() {
   return (
     <>
        <form className="w-full mb-[1rem] text-[15px]">
-                        <div className= "flex gap-[1rem] w-full mb-[1rem]  max-[750px]:flex-wrap">
-                            <div className="min-[750px]:w-[49%] w-[90%]">
+                        <div className= "flex  min-[750px]:gap-[.2rem] min-[880px]:gap-[1rem] w-full mb-[1rem]  max-[750px]:flex-wrap">
+                            <div className="min-[750px]:w-[49%] w-full">
                                 <label>First name</label>
                                 <br />
                                 <input
@@ -66,7 +66,7 @@ function FormProfile() {
                                     className="w-full border-[1px] rounded-lg mt-[.5rem] p-2"
                                 />
                             </div>
-                            <div className="min-[750px]:w-[49%] w-[90%]">
+                            <div className="min-[750px]:w-[49%] w-full">
                                 <label>Last name</label>
                                 <br />
                                 <input
@@ -76,8 +76,8 @@ function FormProfile() {
                                 />
                             </div>
                         </div>
-                        <div className="flex gap-[1rem] items-center w-full mb-[1rem] max-[750px]:flex-wrap">
-                            <div className="min-[750px]:w-[49%] w-[90%]">
+                        <div className="flex min-[750px]:gap-[.2rem] min-[880px]:gap-[1rem] items-center w-full mb-[1rem] max-[750px]:flex-wrap">
+                            <div className="min-[750px]:w-[49%] w-full">
                                 <label>E-mail</label>
                                 <br />
                                 <input
@@ -86,22 +86,22 @@ function FormProfile() {
                                     className="w-full border-[1px] rounded-lg mt-[.5rem] p-2"
                                 />
                             </div>
-                            <div className="min-[750px]:w-[49%] w-[90%]">
+                            <div className="min-[750px]:w-[49%] w-full">
                                 <label>Date of birth</label>
                                 <br />
-                                <div className="flex gap-[1rem] items-center">
+                                <div className="flex min-[750px]:gap-[.1rem] lg:gap-[1rem] gap-[.5rem] items-center flex-wrap">
                                     <select
-                                        className="border-[1px] rounded-lg p-2 outline-none mt-[.5rem]"
+                                        className="border-[1px] rounded-lg p-2 outline-none mt-[.5rem] w-[70px]"
                                     >
                                         {renderDateOptions()}
                                     </select>
                                     <select
-                                        className="border-[1px] rounded-lg p-2 outline-none mt-[.5rem]"
+                                        className="border-[1px] rounded-lg p-2 outline-none mt-[.5rem] w-[120px]"
                                     >
                                         {renderMonthOptions()}
                                     </select>
                                     <select
-                                        className="border-[1px] rounded-lg p-2 outline-none mt-[.5rem]"
+                                        className="border-[1px] rounded-lg p-2 outline-none mt-[.5rem] w-[70px]"
                                     >
                                         {renderYearOptions()}
                                     </select>
@@ -109,7 +109,7 @@ function FormProfile() {
                             </div>
                         </div>
                         <div className="flex gap-[1rem] w-full mb-[1rem]">
-                            <div className="min-[750px]:w-[49%] w-[90%]">
+                            <div className="min-[750px]:w-[49%] w-full">
                                 <label>Address</label>
                                 <br />
                                 <input
