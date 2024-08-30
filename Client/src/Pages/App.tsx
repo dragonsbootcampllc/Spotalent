@@ -16,7 +16,7 @@ import ProfileData from "../Data/Profile";
 function App() {
   return (
     <>
-      <div className="flex flex-col gap-80">
+      <div className="flex flex-col gap-80 box-border">
         <ApplicationDet/>
         <PersonInfo/>
         <JobsPost />
