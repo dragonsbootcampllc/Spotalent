@@ -11,12 +11,13 @@ import NewPost from "../Components/Post";
 import Profile from "../Components/profile/Profile";
 import TrackApplications from "../Components/TrackApplications/TrackApps";
 import FillApplication from './../Components/Application';
-
 import ProfileData from "../Data/Profile";
+
 function App() {
   return (
     <>
       <div className="flex flex-col gap-80 box-border">
+        <MyJobPosts/>
         <ApplicationDet/>
         <PersonInfo/>
         <JobsPost />
@@ -29,7 +30,6 @@ function App() {
         <ApplicationForm/>
         <FillApplication />
         <NewPost/> 
-        <MyJobPosts/>
     </div>
     </>
   );

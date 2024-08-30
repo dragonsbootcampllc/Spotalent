@@ -150,7 +150,7 @@ const MyJobPosts: React.FC = () => {
           <JobPost key={index} {...post} />
         ))}
       </div>
-      <div className="md:w-1/4  flex flex-col-reverse md:flex-col bg-white p-6 shadow-md ">
+      <div className="md:w-1/4 sticky h-min top-0 flex flex-col-reverse md:flex-col bg-white p-6 shadow-md ">
         <div className="flex  fixed bottom-0 left-0 w-full z-10 bg-white p-4 sm:p-0 md:static md:mt-0 items-center space-x-2">
           <ul className='w-full flex justify-center md:block boorder-none md:border-b-2 border-slate-400 p-0 md:pb-2 '>
             <li className='p-3 hover:bg-purple-200 cursor-pointer transition duration-300 px-2 py-1 flex gap-1  text-nowrap md:text-sm md:text-wrap'>
