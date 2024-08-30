@@ -1,4 +1,4 @@
-import XIcon from "../Icons/XIcon";
+import XIcon from "../../assets/Icons/XIcon";
 import Dropdown from "./Dropdown";
 import { RadioGroup } from "@lemonsqueezy/wedges";
 

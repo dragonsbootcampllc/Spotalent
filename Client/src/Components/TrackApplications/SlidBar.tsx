@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SlidBarIcon from "../Icons/SlideBarIcon";
+import SlidBarIcon from "../../assets/Icons/SlideBarIcon";
 const SlideBar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 

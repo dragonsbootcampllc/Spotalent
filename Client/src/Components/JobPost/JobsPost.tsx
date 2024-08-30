@@ -1,7 +1,7 @@
 import data from "../../Data/JobsPost.json";
 import Dropdown from "./Dropdown";
-import SearchIcon from "../Icons/SearchIcon";
-import CompareIcon from "../Icons/CompareIcon";
+import SearchIcon from "../../assets/Icons/SearchIcon";
+import CompareIcon from "../../assets/Icons/CompareIcon";
 
 const JobsPost = () => {
   return (

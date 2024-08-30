@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import data from "../../Data/TrackApps.json";
-import Bar from "../Icons/Bar";
-import LocationIcon from "../Icons/LocationIcon";
+import Bar from "../../assets/Icons/Bar";
+import LocationIcon from "../../assets/Icons/LocationIcon";
 import SlideBar from "./SlidBar";
 
 interface Application {
