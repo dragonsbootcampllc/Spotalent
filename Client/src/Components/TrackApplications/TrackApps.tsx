@@ -15,7 +15,7 @@ interface Application {
   Location: string;
   AppStatus: string;
 }
-const JobsPost = () => {
+const TrackApplications = () => {
   return (
     <div className='flex justify-center'>
       <div className='w-full max-w-[1400px] mx-auto bg-white rounded-xl shadow-md shadow-[#d6d1db] flex flex-row'>
@@ -123,4 +123,4 @@ const JobsPost = () => {
     </div>
   );
 };
-export default JobsPost;
+export default TrackApplications;

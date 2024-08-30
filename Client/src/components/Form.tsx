@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 const dummyPhoto = "https://via.placeholder.com/150?text=No+Photo";
 
-function ApplicationForm() {
+function Form() {
   const currentYear = new Date().getFullYear();
 
   const [formData, setFormData] = useState({
@@ -195,4 +195,4 @@ function ApplicationForm() {
   );
 }
 
-export default ApplicationForm;
+export default Form;

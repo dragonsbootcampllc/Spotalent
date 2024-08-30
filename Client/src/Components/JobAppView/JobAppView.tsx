@@ -1,6 +1,6 @@
 import data from "../../Data/JobAppData.json";
 
-const JobsView: React.FC = () => {
+const JobsAppView: React.FC = () => {
   return (
     <div className='container mx-auto max-w-[1400px] w-full min-h-screen py-4 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-700 to-purple-500 shadow-lg flex flex-col md:flex-row'>
       {/* Job Data Section */}
@@ -128,4 +128,4 @@ const JobsView: React.FC = () => {
   );
 };
 
-export default JobsView;
+export default JobsAppView;
