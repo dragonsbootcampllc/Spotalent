@@ -1,24 +1,15 @@
-import MyJobPosts from "../Components/HomePageForRecuiters/MyJobPosts";
-import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
-import { Flex, Rate } from 'antd';
-
-
-const customIcons: Record<number, React.ReactNode> = {
-  1: <FrownOutlined />,
-  2: <FrownOutlined />,
-  3: <MehOutlined />,
-  4: <SmileOutlined />,
-  5: <SmileOutlined />,
-};
+// import FilterSidebar from "../Components/Bars/FliterSidebar";
+// import JobDisplayCard, { JobDisplayCardProps } from "../Components/Cards/JobDisplayCard";
 
 export default function Home() {
+  // const title: string = "Available Jobs";
+
   return (
-    <div className="flex flex-col gap-80 box-border">
-      <MyJobPosts />
-      <Flex gap="middle" vertical>
-        <Rate defaultValue={2} character={({ index = 0 }) => index + 1} />
-        <Rate defaultValue={3} character={({ index = 0 }) => customIcons[index + 1]} />
-      </Flex>
+    <div className="flex pl-12 py-12 w-full box-border">
+      <div className="w-4/5 px-12">
+        <div className="flex flex-col">
+        </div>
+      </div>
     </div>
   );
 }

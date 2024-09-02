@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from './Pages/Layout/MainLayout';
 import Home from './Pages/Home';
-import FilterSidebar from "./Components/FliterSidebar";
+import FilterSidebar from "./Components/Bars/FliterSidebar";
 
 export default function Router() {
     return (
