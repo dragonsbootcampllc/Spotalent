@@ -31,7 +31,7 @@ export default function Input(props: InputProps) {
 
     return (
         <div className={`w-full ${props.className}`}>
-            <WedgesInput 
+            <WedgesInput
                 {...props}
                 value={value}
                 onChange={(e) => on_change(e.target.value)}
