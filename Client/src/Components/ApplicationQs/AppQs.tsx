@@ -1,80 +1,180 @@
-import XIcon from "../../assets/Icons/XIcon";
-import Dropdown from "./Dropdown";
-import { RadioGroup } from "@lemonsqueezy/wedges";
+import { useEffect, useState } from "react";
+import { XIcon } from "../../assets/Icons";
+import { Dropdown, DropdownProps, Input, InputProps } from "../MicroComponents";
 
-const AppQs = () => {
-    const answers = [
-        { label: "Lorem ipsum dolor sit amet consectetur. Justo facilisis sed massa molestie volutpat purus arcu.", value: "value-1" },
-        { label: "Lorem ipsum dolor sit amet consectetur. Justo facilisis sed massa molestie volutpat purus arcu.", value: "value-2" },
-        { label: "Lorem ipsum dolor sit amet consectetur. Justo facilisis sed massa molestie volutpat purus arcu.", value: "value-3" },
-        { label: "Lorem ipsum dolor sit amet consectetur. Justo facilisis sed massa molestie volutpat purus arcu.", value: "value-4" }
-    ];
+enum QuestionType {
+    Text = "text",
+    MCQ = "mcq",
+    Code = "code",
+}
 
-    const items = answers.map((answer, index) => (
-        <div key={index} className="     mb-2">
-            <div className="mr-2">
-                <RadioGroup.Item label={answer.label} value={answer.value} />
-            </div>
-
-        </div>
-    ));
-
-    return (
-        <>
-            <div className="w-full max-w-4xl mx-auto bg-white rounded-xl shadow-md shadow-[#d6d1db] mt-10 p-6">
-                <div className="text-gray-400 font-semibold mb-6">
-                    <span>New Application</span>
-                </div>
-                <div>
-                    <div className="flex flex-row justify-between">
-                        <div className="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-gray-400 ">
-                            <input
-                                type="text"
-                                name="username"
-                                id="username"
-                                autoComplete="username"
-                                className="border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-[#6B7280] focus:ring-0 sm:text-sm sm:leading-6 outline-none h-10"
-                                placeholder="Question 1"
-                            />
-                        </div>
-                        <div className="mx-3">
-                            <Dropdown />
-                        </div>
-                        <div className="mt-2 cursor-pointer">
-                            <XIcon />
-                        </div>
-                    </div>
-                    <div className="my-2 text-[#6B7280] flex flex-row-reverse">
-                        <span>+ Add Question</span>
-                    </div>
-                    <div className="flex flex-row-reverse">
-                        <button
-                            type="button"
-                            className="w-full justify-center rounded-full bg-[#4B5563] px-24 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#4B5563] sm:ml-3 sm:w-auto"
-                        >
-                            Post
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div className="w-full max-w-4xl mx-auto bg-white rounded-xl shadow-md shadow-[#d6d1db] mt-10 p-6">
-                <div className="text-gray-400 font-semibold mb-6">
-                    <span>ANSRs</span>
-                </div>
-                <div className="mb-2">
-                    <RadioGroup
-                        defaultValue="value-1"
-                        description="Choose an option"
-                        label="Select an Option"
-                        required
-                    >
-                        {items}
-                    </RadioGroup>
-                </div>
-            </div>
-        </>
-    );
+export type Question = {
+    text: string;
+    type?: QuestionType;
 };
 
-export default AppQs;
+export type QuestionFormProps = {
+    questions?: Question[];
+    onValuesUpdate?: (updatedQuesions: Question[]) => void;
+    onSubmit?: (quesions: Question[]) => void;
+};
+
+export default function QuestionForm({
+    questions: questionsProp,
+    onValuesUpdate,
+    onSubmit,
+}: QuestionFormProps) {
+    const dropdownProps: DropdownProps = {
+        options: Object.values(QuestionType),
+        placeholder: "Select type",
+    };
+
+    const inputProps: InputProps = {
+        required: true,
+        className: "w-full",
+        placeholder: "Enter question text",
+    };
+
+    const [questions, setQuestions] = useState<Question[]>((questionsProp && 0 !== questionsProp.length) ? questionsProp : [
+        { text: "", type: undefined },
+    ]);
+
+    const handleAddQuestion = () => {
+        setQuestions((prevQuestions) => [
+            ...prevQuestions,
+            { text: "", type: undefined },
+        ]);
+    };
+
+    const handleEditQuestion = (
+        index: number,
+        field: keyof Question,
+        value: string
+    ) => {
+        const updatedQuesions = questions.map((question, i) =>
+            i === index ? { ...question, [field]: value } : question
+        );
+
+        setQuestions(updatedQuesions);
+        if (onValuesUpdate) {
+            onValuesUpdate(updatedQuesions);
+        }
+    };
+
+    const handleDeleteQuestion = (index: number) => {
+        setQuestions((prevQuestions) =>
+            prevQuestions.filter((_, i) => i !== index)
+        );
+    };
+
+    useEffect(() => {
+        setQuestions(
+            (questionsProp && 0 !== questionsProp.length) ?
+                questionsProp : [{ text: "", type: undefined },]
+        );
+    }, [questionsProp])
+
+    return (
+        <div className="w-full max-w-4xl rounded-xl bg-white p-6">
+            <div className="flex flex-col items-end gap-8">
+                <div className="flex flex-col gap-2 w-full items-end">
+                    {questions.map((question, index) => (
+                        <div key={index} className={`flex w-full gap-3 justify-center items-center ${0 === index && "pr-[30px]"}`}>
+                            <Input
+                                {...inputProps}
+                                onValueChange={(value) =>
+                                    handleEditQuestion(index, "text", value)
+                                }
+                                value={question.text}
+                            />
+                            <Dropdown
+                                {...dropdownProps}
+                                onValueChange={(value) =>
+                                    handleEditQuestion(index, "type", value)
+                                }
+                                value={question.type}
+                            />
+                            {
+                                0 !== index && (
+                                    <button
+                                        onClick={() => handleDeleteQuestion(index)}
+                                        className="w-6 h-6"
+                                    >
+                                        <XIcon />
+                                    </button>
+                                )
+                            }
+                        </div>
+                    ))}
+
+                    <button
+                        onClick={handleAddQuestion}
+                        className="text-gray-900 font-semibold w-full text-center rounded-md hover:bg-gray-400/60 bg-gray-300 transition-all py-2 duration-500"
+                    >
+                        + Add Question
+                    </button>
+                </div>
+
+                {
+                    onSubmit && (
+                        <button
+                            type="button"
+                            className="w-52 justify-center rounded-full bg-gray-700 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800"
+                            onClick={() => {
+                                let is_valid = true;
+
+                                for (const question of questions) {
+                                    if (question.text.length === 0 || !question.type) {
+                                        is_valid = false;
+                                        break;
+                                    }
+                                }
+
+                                if (is_valid) onSubmit(questions);
+                            }}
+                        >
+                            Submit
+                        </button>
+                    )
+                }
+            </div>
+        </div>
+    );
+}
+
+
+//     const answers = [
+//         { label: "Lorem ipsum dolor sit amet consectetur. Justo facilisis sed massa molestie volutpat purus arcu.", value: "value-1" },
+//         { label: "Lorem ipsum dolor sit amet consectetur. Justo facilisis sed massa molestie volutpat purus arcu.", value: "value-2" },
+//         { label: "Lorem ipsum dolor sit amet consectetur. Justo facilisis sed massa molestie volutpat purus arcu.", value: "value-3" },
+//         { label: "Lorem ipsum dolor sit amet consectetur. Justo facilisis sed massa molestie volutpat purus arcu.", value: "value-4" }
+//     ];
+
+//     const items = answers.map((answer, index) => (
+//         <div key={index} className="     mb-2">
+//             <div className="mr-2">
+//                 <RadioGroup.Item label={answer.label} value={answer.value} />
+//             </div>
+
+//         </div>
+//     ));
+
+
+// <div className="w-full max-w-4xl mx-auto bg-white rounded-xl shadow-md shadow-[#d6d1db] mt-10 p-6">
+//     <div className="text-gray-400 font-semibold mb-6">
+//         <span>ANSRs</span>
+//     </div>
+//     <div className="mb-2">
+//         <RadioGroup
+//             defaultValue="value-1"
+//             description="Choose an option"
+//             label="Select an Option"
+//             required
+//         >
+//             {items}
+//         </RadioGroup>
+//     </div>
+// </div>
+
+
+// import { RadioGroup } from "@lemonsqueezy/wedges";

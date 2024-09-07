@@ -6,6 +6,7 @@ import ClockIcon from "./ClockIcon";
 import RightArrowIcon from "./RightArrowIcon";
 import HeartOutlinedIcon from "./HeartOutlinedIcon";
 import HeartIcon from "./HeartIcon";
+import XIcon from "./XIcon";
 
 export {
     LocationIcon,
@@ -16,4 +17,5 @@ export {
     RightArrowIcon,
     HeartOutlinedIcon,
     HeartIcon,
+    XIcon,
 };

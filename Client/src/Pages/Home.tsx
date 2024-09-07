@@ -1,5 +1,3 @@
-// import FilterSidebar from "../Components/Bars/FliterSidebar";
-import { useState } from "react";
 import FlitersSidebar from "../Components/Bars/FlitersSidebar";
 import JobDisplayCard, { JobDisplayCardProps } from "../Components/Cards/JobDisplayCard";
 
