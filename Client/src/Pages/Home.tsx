@@ -1,7 +1,14 @@
 // import FilterSidebar from "../Components/Bars/FliterSidebar";
+import { useState } from "react";
+import FlitersSidebar from "../Components/Bars/FlitersSidebar";
 import JobDisplayCard, { JobDisplayCardProps } from "../Components/Cards/JobDisplayCard";
 
 export default function Home() {
+  // const [sidebarProps, setSidebarProps] = useState<FlitersSidebarProps>({});
+  // useEffect(() => {
+  // }, []);
+
+
   // const title: string = "Available Jobs";
   const cards_data: JobDisplayCardProps[] = [
     {
@@ -117,12 +124,36 @@ export default function Home() {
   ];
 
   return (
-    <div className="grid p-12 gap-5 py-12 w-full grid-cols-3">
-      {
-        cards_data.map(data => (
-          <JobDisplayCard {...data} />
-        ))
-      }
+    <div className="flex w-full h-[calc(100vh-49px)]">
+      <FlitersSidebar />
+
+      <div className="w-full h-full bg-blue-100 overflow-x-hidden overflow-y-auto">
+        <div className="w-full relative flex flex-col">
+          <div className="w-full border-slate-300 border-b-4 flex-none h-44 px-20 sticky z-40 flex justify-start gap-20 items-center top-0 bg-neutral-900/40">
+            <label htmlFor="" className="flex flex-col gap-2">
+              <span className="text-sm font-semibold">Label placeholder</span>
+              <span className="rounded-md p-2 text-xl min-w-72 inline-block border border-slate-800">Input placeholder</span>
+            </label>
+            <label htmlFor="" className="flex flex-col gap-2">
+              <span className="text-sm font-semibold">Label placeholder</span>
+              <span className="rounded-md p-2 text-xl min-w-72 inline-block border border-slate-800">Input placeholder</span>
+            </label>
+            <label htmlFor="" className="flex flex-col gap-2">
+              <span className="text-sm font-semibold">Label placeholder</span>
+              <span className="rounded-md p-2 text-xl min-w-72 inline-block border border-slate-800">Input placeholder</span>
+            </label>
+          </div>
+
+          <div className="w-full flex flex-wrap justify-around p-5 gap-5 box-border">
+            {
+              cards_data.map(data => (
+                <JobDisplayCard {...data} />
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }

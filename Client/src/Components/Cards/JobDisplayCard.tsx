@@ -116,7 +116,7 @@ export default function JobDisplayCard({
                                 {detail.icon}
                             </span>
 
-                            <span className="whitespace-nowrap">{detail.text}</span>
+                            <span className="">{detail.text}</span>
                         </div>
                     ))}
                 </div>
@@ -141,11 +141,20 @@ export default function JobDisplayCard({
                         {formatTimePosted(timePosted)}
                     </span>
 
-                    <button className="bg-purple-500 text-white px-4 py-2 rounded-full flex items-center gap-2 hover:gap-3 hover:opacity-90 transition-all">
-                        <span>Details</span>
-                        <span className="w-4 aspect-square">
-                            <RightArrowIcon />
-                        </span>
+                    <div className="flex gap-3 font-semibold">
+                        <button className="border-purple-500 border text-purple-500 px-4 py-2 rounded-full flex items-center gap-2 hover:gap-3 hover:opacity-90 transition-all">
+                            <span>Details</span>
+                        </button>
+                        <button className="bg-purple-500 text-white px-4 py-2 rounded-full flex items-center gap-2 hover:gap-3 hover:opacity-90 transition-all">
+                            <span>Apply</span>
+                            <span className="w-4 aspect-square">
+                                <RightArrowIcon />
+                            </span>
+                        </button>
+                    </div>
+
+                    <button className="bg-purple-500 hidden  font-semibold text-white px-4 py-2 rounded-full flex items-center gap-2 hover:gap-3 hover:opacity-90 transition-all">
+                        Details
                     </button>
                 </div>
             </div>
