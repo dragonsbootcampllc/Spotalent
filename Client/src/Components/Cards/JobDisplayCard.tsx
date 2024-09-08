@@ -1,5 +1,6 @@
 import { ReactNode, useState } from "react";
 import { BuildingIcon, ClockIcon, CoinIcon, ExclamationMarkIcon, HeartIcon, HeartOutlinedIcon, LocationIcon, RightArrowIcon } from "../../assets/Icons";
+import { formatTimeDifference } from "../../Services/utils";
 
 export type JobDisplayCardProps = {
     title: string;
@@ -13,28 +14,7 @@ export type JobDisplayCardProps = {
     LogoIconComponent?: ReactNode;
     isFavorite?: boolean;
     handleFavorite?: (favorite: boolean) => void;
-};
-
-// Helper function to calculate and format the time difference
-const formatTimePosted = (timePosted: Date) => {
-    const now = new Date();
-    const diff = now.getTime() - timePosted.getTime();
-
-    const seconds = Math.floor(diff / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-    const weeks = Math.floor(days / 7);
-    const months = Math.floor(weeks / 4.35);
-    const years = Math.floor(months / 12);
-
-    if (seconds < 60) return "just now";
-    if (minutes < 60) return `${minutes}m ago`;
-    if (hours < 24) return `${hours}h ago`;
-    if (days < 7) return `${days}d ago`;
-    if (weeks < 4) return `${weeks}w ago`;
-    if (months < 12) return `${months}mo ago`;
-    return `${years}y ago`;
+    isApplyEnd?: boolean;
 };
 
 export default function JobDisplayCard({
@@ -48,7 +28,8 @@ export default function JobDisplayCard({
     tags,
     LogoIconComponent,
     isFavorite = false,
-    handleFavorite
+    handleFavorite,
+    isApplyEnd = false,
 }: JobDisplayCardProps) {
     const jobDetails = [
         {
@@ -138,10 +119,10 @@ export default function JobDisplayCard({
 
                 <div className="flex w-full justify-between items-center">
                     <span className="text-blue-500 font-semibold">
-                        {formatTimePosted(timePosted)}
+                        {formatTimeDifference(timePosted)}
                     </span>
 
-                    <div className="flex gap-3 font-semibold">
+                    <div className={`gap-3 font-semibold ${isApplyEnd ? "flex" : "hidden"}`}>
                         <button className="border-purple-500 border text-purple-500 px-4 py-2 rounded-full flex items-center gap-2 hover:gap-3 hover:opacity-90 transition-all">
                             <span>Details</span>
                         </button>
@@ -153,7 +134,7 @@ export default function JobDisplayCard({
                         </button>
                     </div>
 
-                    <button className="bg-purple-500 hidden  font-semibold text-white px-4 py-2 rounded-full flex items-center gap-2 hover:gap-3 hover:opacity-90 transition-all">
+                    <button className={`bg-purple-500 font-semibold text-white px-4 py-2 rounded-full items-center gap-2 hover:gap-3 hover:opacity-90 transition-all ${isApplyEnd ? "hidden" : "flex"}`}>
                         Details
                     </button>
                 </div>

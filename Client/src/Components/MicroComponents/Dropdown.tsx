@@ -15,7 +15,7 @@ export type Option = {
     value: string;
 }
 
-export type DropdownProps = {
+export interface DropdownProps {
     onValueChange?: (value: string) => void;
     options: Option[] | string[];
     placeholder?: string;

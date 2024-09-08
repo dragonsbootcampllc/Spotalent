@@ -1,7 +1,7 @@
-import { Input as WedgesInput } from "@lemonsqueezy/wedges";
-import { ReactNode, useEffect, useState } from "react";
+import { Textarea as WedgesTextarea } from '@lemonsqueezy/wedges'
+import { ReactNode, useEffect, useState } from 'react';
 
-export interface InputProps {
+export interface TextareaProps {
     description?: ReactNode;
     destructive?: boolean;
     disabled?: boolean;
@@ -13,9 +13,9 @@ export interface InputProps {
     placeholder?: string;
     value?: string;
     onValueChange?: (value: string) => void;
-};
+}
 
-export default function Input(props: InputProps) {
+export default function Textarea(props: TextareaProps) {
     const [value, setValue] = useState(props.value || "");
 
     const onChange = (newValue: string) => {
@@ -31,11 +31,11 @@ export default function Input(props: InputProps) {
 
     return (
         <div className={`w-full ${props.className}`}>
-            <WedgesInput
+            <WedgesTextarea
                 {...props}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
             />
         </div>
-    );
+    )
 }

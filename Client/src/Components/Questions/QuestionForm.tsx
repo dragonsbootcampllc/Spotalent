@@ -1,17 +1,7 @@
 import { useEffect, useState } from "react";
 import { XIcon } from "../../assets/Icons";
 import { Dropdown, DropdownProps, Input, InputProps } from "../MicroComponents";
-
-enum QuestionType {
-    Text = "text",
-    MCQ = "mcq",
-    Code = "code",
-}
-
-export type Question = {
-    text: string;
-    type?: QuestionType;
-};
+import { Question, QuestionType } from "../../Types";
 
 export type QuestionFormProps = {
     questions?: Question[];
@@ -31,7 +21,7 @@ export default function QuestionForm({
 
     const inputProps: InputProps = {
         required: true,
-        className: "w-full",
+        className: "w-full bg-transparent",
         placeholder: "Enter question text",
     };
 
@@ -75,7 +65,7 @@ export default function QuestionForm({
     }, [questionsProp])
 
     return (
-        <div className="w-full max-w-4xl rounded-xl bg-white p-6">
+        <div className="w-full max-w-4xl rounded-xl p-6 bg-transparent">
             <div className="flex flex-col items-end gap-8">
                 <div className="flex flex-col gap-2 w-full items-end">
                     {questions.map((question, index) => (
@@ -141,40 +131,3 @@ export default function QuestionForm({
         </div>
     );
 }
-
-
-//     const answers = [
-//         { label: "Lorem ipsum dolor sit amet consectetur. Justo facilisis sed massa molestie volutpat purus arcu.", value: "value-1" },
-//         { label: "Lorem ipsum dolor sit amet consectetur. Justo facilisis sed massa molestie volutpat purus arcu.", value: "value-2" },
-//         { label: "Lorem ipsum dolor sit amet consectetur. Justo facilisis sed massa molestie volutpat purus arcu.", value: "value-3" },
-//         { label: "Lorem ipsum dolor sit amet consectetur. Justo facilisis sed massa molestie volutpat purus arcu.", value: "value-4" }
-//     ];
-
-//     const items = answers.map((answer, index) => (
-//         <div key={index} className="     mb-2">
-//             <div className="mr-2">
-//                 <RadioGroup.Item label={answer.label} value={answer.value} />
-//             </div>
-
-//         </div>
-//     ));
-
-
-// <div className="w-full max-w-4xl mx-auto bg-white rounded-xl shadow-md shadow-[#d6d1db] mt-10 p-6">
-//     <div className="text-gray-400 font-semibold mb-6">
-//         <span>ANSRs</span>
-//     </div>
-//     <div className="mb-2">
-//         <RadioGroup
-//             defaultValue="value-1"
-//             description="Choose an option"
-//             label="Select an Option"
-//             required
-//         >
-//             {items}
-//         </RadioGroup>
-//     </div>
-// </div>
-
-
-// import { RadioGroup } from "@lemonsqueezy/wedges";
