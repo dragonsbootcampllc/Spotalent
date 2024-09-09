@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from './Pages/Layout/MainLayout';
 import Home from './Pages/Home';
+import Development from "./Pages/Development";
 import FilterSidebar from "./Components/Bars/FilterSideBar/FliterSidebar";
 
 export default function Router() {
@@ -23,7 +24,8 @@ export default function Router() {
                                 Location:"Your Mom"
                             }
                             }/>} />
-                    </Route>
+                        <Route path="/development" element={<Development />} />
+                </Route>
                 </Routes>
             </BrowserRouter>
         </div>
