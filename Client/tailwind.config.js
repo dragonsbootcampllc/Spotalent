@@ -8,7 +8,11 @@ export default {
     "node_modules/@lemonsqueezy/wedges/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#ff00aa",
+      },
+    },
   },
   darkMode: "class",
   plugins: [wedgesTW()],

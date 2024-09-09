@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <div className="flex pl-12 gap-5 py-12 w-full">
       <Alert color="error">You're awesome!</Alert>
-      <Alert color="gray">Faisal is awesome!</Alert>
-      <Alert color="info">Nageh is P***!</Alert>
+      <Alert color="gray">Faisal is a*s!</Alert>
+      <Alert color="info">Nageh is King</Alert>
       <Alert color="primary">You're awesome!</Alert>
       <Alert color="success">You're awesome!</Alert>
       <Alert color="warning">You're awesome!</Alert>
