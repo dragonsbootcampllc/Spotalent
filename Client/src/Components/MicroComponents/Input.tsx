@@ -34,7 +34,10 @@ export default function Input(props: InputProps) {
             <WedgesInput
                 {...props}
                 value={value}
-                onChange={(e) => onChange(e.target.value)}
+                onChange={(e) => {
+                    let event = e as React.ChangeEvent<HTMLInputElement>;
+                    onChange(event.target.value);
+                }}
             />
         </div>
     );
