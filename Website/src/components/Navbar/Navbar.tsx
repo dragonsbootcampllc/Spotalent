@@ -1,28 +1,25 @@
-import { useState } from "react";
 import MobileSidebar from "./MobileSidebar";
-import NavLinks from "./navLinks";
+import NavLinks from "./NavLinks";
 import AuthButtons from "./AuthButtons";
-import UserProfileDropdown from "./UserProfileDropdown";
+import { NavLink, Outlet } from 'react-router-dom';
 
-interface User {
-    userId: string,
-    userName: string,
-    userImage: string
-}
+
 
 export default function Navbar() {
-    const [user, setUser] = useState<User | null>(null);
 
     return (
         <>
             <div className="w-full fixed top-0 left-1/2 -translate-x-1/2">
-                <span>logo</span>
+                <NavLink to="/">
+                    <div>
+                        <img src="/Images/Logo.png" alt="" />
+                    </div>
+                </NavLink>
 
-                <div className="md:block hidden"> {/* You can change `md` to specific screen, this is just demo */}
+                <div className="md:flex items-center justify-between hidden"> {/* You can change `md` to specific screen, this is just demo */}
                     <NavLinks />
-                    {
-                        user ? (<UserProfileDropdown />) : (<AuthButtons />)
-                    }
+                    <AuthButtons />
+
                 </div>
 
                 <div className="md:hidden block"> {/* You can change `md` to specific screen, this is just demo */}
@@ -31,6 +28,9 @@ export default function Navbar() {
             </div>
 
             <MobileSidebar />
+            <div className="">
+                <Outlet />
+            </div>
         </>
     )
 }
