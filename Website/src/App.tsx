@@ -8,6 +8,8 @@ import About from "./Pages/About.tsx";
 import Services from "./Pages/Services.tsx";
 import FindAJob from "./Pages/FindAJob.tsx";
 import Talents from "./Pages/Talents.tsx";
+import { Suspense } from 'react';
+import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner.tsx';
 
 
 const Layout = () => (
@@ -46,7 +48,7 @@ const router = createBrowserRouter([
         element: <Services />,
       }
     ],
-    
+
   },
   {
     path: "*", element: <NotFound />,
@@ -56,7 +58,12 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-     <RouterProvider router={router} />
+      <Suspense fallback={<LoadingSpinner />}>
+
+
+        <RouterProvider router={router} />
+      </Suspense>
+
     </>
   )
 }
