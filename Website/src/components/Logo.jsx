@@ -1,5 +1,5 @@
 
-export default function Logo(image_urls) {
+export default function Logo({ image_urls }) {
     return (
         <div className="">
             <h3 className=""></h3>
