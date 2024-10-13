@@ -10,6 +10,10 @@ import FindAJob from "./Pages/FindAJob.tsx";
 import Talents from "./Pages/Talents.tsx";
 import { Suspense } from 'react';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner.tsx';
+import React from 'react';
+import Hero from './Components/Hero';
+import Company from './Components/Company';
+import Jobs from './Components/Jobs';
 
 
 const Layout = () => (
@@ -59,13 +63,10 @@ function App() {
   return (
     <>
       <Suspense fallback={<LoadingSpinner />}>
-
-
         <RouterProvider router={router} />
       </Suspense>
-
     </>
-  )
+  );
 }
 
-export default App
+export default App;
