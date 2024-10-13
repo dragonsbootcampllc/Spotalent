@@ -14,7 +14,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "../../Website/src/components/Navbar"],
   "typeRoots": ["node_modules/@types"],
   "types": ["estree", "prop-types", "react", "react-dom"]
 }
