@@ -42,7 +42,7 @@ const Searchbar: React.FC = () => {
             />
           </svg>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex max-sm:hidden items-center space-x-2">
           <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full">
             Web Design <button className="ml-2 text-sm font-semibold">✕</button>
           </span>

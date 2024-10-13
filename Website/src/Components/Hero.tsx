@@ -55,7 +55,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </section>
-      <div className='-mt-8'>
+      <div className='md:-mt-8'>
         <Searchbar />
       </div>
     </div>
