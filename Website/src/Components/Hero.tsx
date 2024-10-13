@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from "./Nav";
+import Searchbar from './Searchbar';
 
 import { FiBriefcase } from 'react-icons/fi';
 import { PiStarFourFill } from "react-icons/pi";
@@ -54,6 +55,9 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </section>
+      <div className='-mt-8'>
+        <Searchbar />
+      </div>
     </div>
   );
 };
