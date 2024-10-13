@@ -1,7 +1,16 @@
+import React from 'react';
+import Hero from '../Components/Hero';
+import Company from '../Components/Company';
+import Jobs from '../Components/Jobs';
+
 const Home: React.FC = () => {
     return (
-      <div className="  flex items-center justify-center h-screen">
-        <h1 className="text-4xl font-bold">Home Page</h1>
+      <div className="w-full h-full">
+        <div className='bg-gradient-to-r from-[#F3F7FE] to-[#ffffff]'>
+          <Hero />
+        </div>
+        <Company />
+        <Jobs />
       </div>
     );
   };

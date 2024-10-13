@@ -1,7 +1,7 @@
-import Navbar from "./components/Navbar/Navbar"
+import Navbar from "./Components/Navbar/Navbar"
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ScrollToTop from './components/ScrollToTop';
+import ScrollToTop from './Components/ScrollToTop';
 import NotFound from "./Pages/NotFoundPage.tsx";
 import Home from "./Pages/Home.tsx";
 import About from "./Pages/About.tsx";
@@ -9,11 +9,8 @@ import Services from "./Pages/Services.tsx";
 import FindAJob from "./Pages/FindAJob.tsx";
 import Talents from "./Pages/Talents.tsx";
 import { Suspense } from 'react';
-import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner.tsx';
-import React from 'react';
-import Hero from './Components/Hero';
-import Company from './Components/Company';
-import Jobs from './Components/Jobs';
+import LoadingSpinner from './Components/LoadingSpinner/LoadingSpinner.tsx';
+
 
 
 const Layout = () => (

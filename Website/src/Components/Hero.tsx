@@ -1,5 +1,4 @@
 import React from 'react';
-import Nav from "./Nav";
 import Searchbar from './Searchbar';
 
 import { FiBriefcase } from 'react-icons/fi';
@@ -10,7 +9,6 @@ import personImage from '../../public/Images/person.png'; // Replace with actual
 const Hero: React.FC = () => {
   return (
     <div className="px-[5%] py-8">
-      <Nav />
       <section className="w-full gap-10 flex flex-col md:flex-row justify-between items-center py-10">
         <div className="flex flex-col gap-4 md:w-1/2">
           <div className="flex items-center gap-2">
