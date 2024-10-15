@@ -8,6 +8,7 @@ import Grid from '../Components/Grid';
 import Comments from '../Components/Comments';
 import Pricing from '../Components/Pricing';
 import Subscribe from '../Components/Subscribe';
+import FAQSection from '../Components/FAQ';
 
 const Home: React.FC = () => {
     return (
@@ -23,6 +24,7 @@ const Home: React.FC = () => {
         <Comments />
         <Pricing />
         <Subscribe />
+        <FAQSection />
       </div>
     );
   };
