@@ -9,10 +9,11 @@ import Comments from '../Components/Comments';
 import Pricing from '../Components/Pricing';
 import Subscribe from '../Components/Subscribe';
 import FAQSection from '../Components/FAQ';
+import Footer from '../Components/Footer';
 
 const Home: React.FC = () => {
     return (
-      <div className="w-full h-full">
+      <div className="w-full max-w-[1400px] mx-auto h-full">
         <div className='bg-gradient-to-r from-[#F3F7FE] to-[#ffffff]'>
           <Hero />
         </div>
@@ -25,6 +26,7 @@ const Home: React.FC = () => {
         <Pricing />
         <Subscribe />
         <FAQSection />
+        <Footer />
       </div>
     );
   };
