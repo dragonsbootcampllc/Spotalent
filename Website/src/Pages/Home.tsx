@@ -5,6 +5,9 @@ import Jobs from '../Components/Jobs';
 import Apply from '../Components/Apply';
 import CardsHover from '../Components/CardHover';
 import Grid from '../Components/Grid';
+import Comments from '../Components/Comments';
+import Pricing from '../Components/Pricing';
+import Subscribe from '../Components/Subscribe';
 
 const Home: React.FC = () => {
     return (
@@ -17,6 +20,9 @@ const Home: React.FC = () => {
         <Apply />
         <CardsHover />
         <Grid />
+        <Comments />
+        <Pricing />
+        <Subscribe />
       </div>
     );
   };
