@@ -17,7 +17,7 @@ const logos = [
 
 const Company: React.FC = () => {
   return (
-    <div className="w-full mt-10 pb-20 flex flex-col bg-[#FDFDFD] justify-center items-center">
+    <div className="w-full py-16 flex flex-col bg-[#FDFDFD] justify-center items-center">
       <h1 className="text-3xl font-semibold text-center">Trusted by Top Companies</h1>
       <div className="flex flex-wrap justify-center gap-6 px-6 mt-10">
         {logos.map((logo, index) => (
