@@ -4,7 +4,7 @@ import zoom from "../../public/Images/zoom.png";
 import coinbase from "../../public/Images/coinbase.png";
 import adobe from "../../public/Images/adobe.png";
 import slack from "../../public/Images/slack.png";
-import webflow from "../../public/Images/webflow.png";
+import webflow from "../../public/Images/webflow.svg";
 
 const logos = [
   { src: spotify, alt: "spotify" },
