@@ -24,7 +24,7 @@ const CardsHover: React.FC = () => {
   return (
     <div className="my-20">
       <h2 className="text-center text-4xl font-bold max-w-xl mx-auto mb-10">Levarage global world-class talented people</h2>
-      <div className="mb-10">
+      <div className="mb-10 max-md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:px-32">
           {cardData.map((card, index) => (
             <div key={index} className="bg-[#FAF9F6] rounded-3xl shadow-lg px-6 py-10 hover:bg-[#004B9C] group hover:text-white duration-300">
