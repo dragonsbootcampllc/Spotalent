@@ -14,7 +14,7 @@ const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, ans
         className="flex justify-between items-center cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h3 className="text-lg font-semibold">{question}</h3>
+        <h3 className="text-lg font-semibold w-[90%]">{question}</h3>
         <div className='h-6 w-6 flex items-center justify-center rounded-full bg-[#004B9C]'>
           <span className="text-xl text-white">{isOpen ? '-' : '+'}</span>
         </div>
@@ -45,7 +45,7 @@ const FAQSection: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col lg:flex-row justify-center gap-8 mx-auto p-24">
+    <div className="flex flex-col lg:flex-row justify-center gap-8 mx-auto px-6 md:p-24 mt-6">
       <div className='flex flex-col gap-4 max-w-lg'>
         <p className='text-[#004B9C] text-center lg:text-left'>Frequently Asked Questions</p>
         <h2 className="text-3xl text-center lg:text-left max-w-[300px] font-bold mb-6">Discover the Future of Sales Management</h2>

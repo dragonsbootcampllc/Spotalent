@@ -118,7 +118,7 @@ const Pricing: React.FC = () => {
 
   return (
     <div className="py-16 flex flex-col items-center">
-      <h2 className="text-4xl font-bold mb-4">Simple, transparent pricing</h2>
+      <h2 className="text-4xl font-bold mb-4 px-6 max-md:text-center">Simple, transparent pricing</h2>
       <p className="text-lg text-gray-600 mb-8">No contracts. No surprise fees.</p>
 
       <div className="flex mb-10 gap-4">

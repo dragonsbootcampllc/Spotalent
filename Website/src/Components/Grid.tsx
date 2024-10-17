@@ -32,16 +32,18 @@ const Grid: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-16 py-20">
-      <h2 className="text-center md:text-3xl lg:text-4xl max-w-2xl mx-auto font-semibold">Unlock Job Opportunities and Gamify Your Growth with AI</h2>
-      <div className="px-20 flex flex-col gap-8">
+    <div className="flex flex-col gap-16 md:py-20">
+      <h2 className="text-center md:text-3xl lg:text-4xl px-6 max-w-2xl mx-auto font-semibold">Unlock Job Opportunities and Gamify Your Growth with AI</h2>
+      <div className="md:px-20 px-6 flex flex-col gap-8">
         <div className="flex flex-col gap-4">
-          <div className="bg-[#F6F7FA] flex gap-20 rounded-3xl p-6 w-full">
-            <Lottie
-              options={defaultOptions}
-              height={400}
-              width={400}
-            />
+          <div className="bg-[#F6F7FA] flex justify-evenly gap-20 rounded-3xl p-6 w-full">
+            <div className="max-md:hidden">
+              <Lottie
+                options={defaultOptions}
+                height={400}
+                width={400}
+              />
+            </div>
             <div className="py-12">
               <div className="bg-[#036BDC] text-white font-semibold text-2xl rounded-xl w-10 h-10 flex items-center justify-center">
                 <BiTestTube />
@@ -53,8 +55,8 @@ const Grid: React.FC = () => {
               <a href="#" className="flex hover:text-[#2b5d93] duration-300 gap-2 items-center text-[#036BDC] mt-4">Learn more <span><FiArrowUpRight /></span></a>
             </div>
           </div>
-          <div className="bg-[#F6F7FA] flex gap-20 rounded-3xl p-6 w-full">
-            <div className="py-12 mx-20">
+          <div className="bg-[#F6F7FA] flex gap-20 justify-evenly rounded-3xl p-6 w-full">
+            <div className="py-12 mx:mx-20">
               <div className="bg-[#036BDC] text-white font-semibold text-2xl rounded-xl w-10 h-10 flex items-center justify-center">
                 <VscGame />
               </div>
@@ -71,17 +73,19 @@ const Grid: React.FC = () => {
               autoPlay
               loop
               muted
-              className=""
+              className="max-md:hidden"
             />
           </div>
         </div>
-        <div className="flex gap-4 justify-evenly w-full">
-          <div className="bg-[#F6F7FA] w-[48%] gap-6 rounded-3xl p-6">
+        <div className="flex max-md:flex-col gap-4 justify-evenly w-full">
+          <div className="bg-[#F6F7FA] md:w-[48%] gap-6 rounded-3xl p-6">
+            <div className="max-md:hidden">
             <Lottie
               options={defaultOptions2}
               height={400}
               width={400}
             />
+            </div>
             <div className="py-12">
               <div className="bg-[#036BDC] text-white font-semibold text-2xl rounded-xl w-10 h-10 flex items-center justify-center">
                 <TbFileCv />
@@ -93,7 +97,7 @@ const Grid: React.FC = () => {
               <a href="#" className="flex hover:text-[#2b5d93] duration-300 gap-2 items-center text-[#036BDC] mt-4">Learn more <span><FiArrowUpRight /></span></a>
             </div>
           </div>
-          <div className="bg-[#F6F7FA] w-[48%] rounded-3xl p-6">
+          <div className="bg-[#F6F7FA] md:w-[48%] rounded-3xl p-6">
             <video
               src={work}
               autoPlay
@@ -101,6 +105,7 @@ const Grid: React.FC = () => {
               muted
               width={400}
               height={400}
+              className="max-md:hidden"
             />
             <div className="py-12">
               <div className="bg-[#036BDC] text-white font-semibold text-2xl rounded-xl w-10 h-10 flex items-center justify-center">

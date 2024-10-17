@@ -28,9 +28,9 @@ const commentsData = [
 
 const Comments: React.FC = () => {
   return (
-    <div className="py-20 flex flex-col items-center gap-10 px-20">
+    <div className="py-20 flex flex-col items-center gap-10 md:px-20">
       <h1 className="text-4xl font-semibold text-center max-w-lg mx-auto">Some comments people that hired by spot talent</h1>
-      <div className="flex gap-8 px-16 py-2">
+      <div className="flex max-md:flex-col gap-8 px-6 md:px-16 py-2">
         {commentsData.map((comment) => (
           <div key={comment.id} className="flex flex-col gap-4 justify-center items-center border border-gray-200 hover:border-none hover:shadow-lg rounded-xl p-4 duration-300">
             <div className="relative">
