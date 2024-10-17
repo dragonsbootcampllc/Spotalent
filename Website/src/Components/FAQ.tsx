@@ -45,8 +45,8 @@ const FAQSection: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col lg:flex-row justify-center gap-8 mx-auto px-6 md:p-24 mt-6">
-      <div className='flex flex-col gap-4 max-w-lg'>
+    <div className="flex flex-col max-lg:items-center lg:flex-row justify-center gap-8 mx-auto px-6 md:p-24 mt-6">
+      <div className='flex flex-col gap-4 md:max-w-lg'>
         <p className='text-[#004B9C] text-center lg:text-left'>Frequently Asked Questions</p>
         <h2 className="text-3xl text-center lg:text-left max-w-[300px] font-bold mb-6">Discover the Future of Sales Management</h2>
       </div>
