@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Navbar from "./Components/Navbar/Navbar";
+import Navbar from "./Components/Nav/Navbar";
 import ScrollToTop from './Components/ScrollToTop';
 import NotFound from "./Pages/NotFoundPage";
 import Home from "./Pages/Home";
