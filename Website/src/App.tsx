@@ -8,7 +8,7 @@ import About from "./Pages/About";
 import Services from "./Pages/Services";
 import FindAJob from "./Pages/FindAJob";
 import Talents from "./Pages/Talents";
-import LoadingSpinner from './Components/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from './Components/LoadingSpinner';
 
 const Layout: React.FC = () => (
   <>
