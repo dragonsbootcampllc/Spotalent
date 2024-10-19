@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navbar from "./Components/Nav/Navbar";
-import ScrollToTop from './Components/ScrollToTop';
+import ScrollTop from './Components/ScrollTop';
 import NotFound from "./Pages/NotFoundPage";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
@@ -12,7 +12,7 @@ import LoadingSpinner from './Components/LoadingSpinner';
 
 const Layout: React.FC = () => (
   <>
-    <ScrollToTop /> {/* Scroll to top on every navigation */}
+    <ScrollTop /> {/* Scroll to top on every navigation */}
     <Navbar /> {/* Navbar appears only once */}
     {/* Footer is placed here */}
   </>

@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const ScrollToTop: React.FC = () => {
+const ScrollTop: React.FC = () => {
   const { pathname } = useLocation(); // Get current route's pathname
 
   useEffect(() => {
@@ -11,4 +11,4 @@ const ScrollToTop: React.FC = () => {
   return null; // No UI component needed, it's purely functional
 };
 
-export default ScrollToTop;
+export default ScrollTop;
