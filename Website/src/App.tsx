@@ -1,26 +1,22 @@
-import Navbar from "./Components/Navbar/Navbar"
-
+import React, { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Navbar from "./Components/Navbar/Navbar";
 import ScrollToTop from './Components/ScrollToTop';
-import NotFound from "./Pages/NotFoundPage.tsx";
-import Home from "./Pages/Home.tsx";
-import About from "./Pages/About.tsx";
-import Services from "./Pages/Services.tsx";
-import FindAJob from "./Pages/FindAJob.tsx";
-import Talents from "./Pages/Talents.tsx";
-import { Suspense } from 'react';
-import LoadingSpinner from './Components/LoadingSpinner/LoadingSpinner.tsx';
+import NotFound from "./Pages/NotFoundPage";
+import Home from "./Pages/Home";
+import About from "./Pages/About";
+import Services from "./Pages/Services";
+import FindAJob from "./Pages/FindAJob";
+import Talents from "./Pages/Talents";
+import LoadingSpinner from './Components/LoadingSpinner/LoadingSpinner';
 
-
-
-const Layout = () => (
+const Layout: React.FC = () => (
   <>
     <ScrollToTop /> {/* Scroll to top on every navigation */}
     <Navbar /> {/* Navbar appears only once */}
     {/* Footer is placed here */}
   </>
 );
-
 
 // Define the router with routes and loaders
 const router = createBrowserRouter([
@@ -49,20 +45,18 @@ const router = createBrowserRouter([
         element: <Services />,
       }
     ],
-
   },
   {
-    path: "*", element: <NotFound />,
+    path: "*", 
+    element: <NotFound />,
   }
 ]);
 
-function App() {
+const App: React.FC = () => {
   return (
-    <>
-      <Suspense fallback={<LoadingSpinner />}>
-        <RouterProvider router={router} />
-      </Suspense>
-    </>
+    <Suspense fallback={<LoadingSpinner />}>
+      <RouterProvider router={router} />
+    </Suspense>
   );
 }
 

@@ -4,14 +4,9 @@ import AuthButtons from "./AuthButtons";
 import { NavLink, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-
-
-
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(true);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,17 +23,15 @@ export default function Navbar() {
     };
   }, []);
 
-
   const toggleNav = () => {
     setIsOpen(!isOpen);
   };
-
 
   return (
     <>
       {isOpen && (
         <div
-          className="fixed inset-0  lg:hidden bg-black opacity-50"
+          className="fixed inset-0 lg:hidden bg-black opacity-50"
           onClick={toggleNav}
         />
       )}
@@ -50,16 +43,14 @@ export default function Navbar() {
           </NavLink>
 
           {/* Desktop Nav Links and Auth Buttons (shown on large screens) */}
-          <div className="hidden lg:flex items-center justify-between  space-x-8">
+          <div className="hidden lg:flex items-center justify-between space-x-8">
             <NavLinks />
             <AuthButtons />
           </div>
 
           {/* Mobile Sidebar (shown on smaller screens) */}
           <div className="lg:hidden">
-            <button
-              onClick={toggleNav}
-            >
+            <button onClick={toggleNav}>
               <svg
                 className="w-7 h-7 text-[#036bdc]"
                 fill="none"
@@ -76,18 +67,17 @@ export default function Navbar() {
               </svg>
             </button>
 
-            < MobileSidebar
+            <MobileSidebar
               toggleNav={toggleNav}
               isOpen={isOpen}
             />
           </div>
         </div>
-
       </div>
 
-      <div className="">
+      <div>
         <Outlet />
       </div>
     </>
-  )
+  );
 }
