@@ -1,10 +1,11 @@
+import React from "react";
 import MobileSidebar from "./MobileSidebar";
 import NavLinks from "./NavLinks";
 import AuthButtons from "./AuthButtons";
 import { NavLink, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-export default function Navbar() {
+const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
@@ -80,4 +81,6 @@ export default function Navbar() {
       </div>
     </>
   );
-}
+};
+
+export default Navbar;
