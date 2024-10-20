@@ -1,60 +1,68 @@
-import React from 'react';
-import Searchbar from './Searchbar';
+import React from "react";
+import moha from "../../public/Images/Mohamed_Ali.jpg";
+import ahmed from "../../public/Images/AhmedSherif.jpeg";
+import faisool from "../../public/Images/Faysool.jpg";
+import nageh from "../../public/Images/Ahmed_Nageh.jpg";
+import mohab from "../../public/Images/Mohab_Mohammed.jpg";
+import tarek from "../../public/Images/Ahmed_tarek.jpg";
 
-import { FiBriefcase } from 'react-icons/fi';
-import { PiStarFourFill } from "react-icons/pi";
-import { BiSolidZap } from "react-icons/bi";
-import personImage from '../../public/Images/person.png'; // Replace with actual image path
+const imagesTop = [
+  { src: ahmed, alt: "Ahmed Sherif" },
+  { src: moha, alt: "Mohamed Ali" },
+  { src: faisool, alt: "Faisool" },
+];
+
+const imagesBottom = [
+  { src: nageh, alt: "Ahmed Nageh" },
+  { src: mohab, alt: "Mohab Mohammed" },
+  { src: tarek, alt: "Ahmed Tarek" },
+];
 
 const Hero: React.FC = () => {
   return (
-    <div className="px-[5%] py-8">
-      <section className="w-full gap-10 flex flex-col md:flex-row justify-between items-center py-10">
-        <div className="flex flex-col gap-4 md:w-1/2">
-          <div className="flex items-center gap-2">
-            <button className="bg-[#EAF0FF] p-2 rounded-full">
-              <div className="w-4 h-4 bg-[#036BDC] rounded-full"></div>
-            </button>
-            <span className="text-lg font-medium">Find Your Dream Job</span>
+    <div className="w-full mb-10 max-md:mb-5 px-4">
+      <div>
+        <h1 className="text-8xl max-md:text-4xl pt-36 max-md:pt-28 md:px-24 lg:px-28 pb-4 font-bold text-center">
+          Take{" "}
+          <div className="inline-block">
+            <div className="flex">
+              {imagesTop.map((image, index) => (
+                <img
+                  key={index}
+                  src={image.src}
+                  alt={image.alt}
+                  className={`w-16 max-md:w-10 h-16 max-md:h-10 rounded-full hover:scale-125 duration-300 ${index !== 0 ? '-mx-3 max-md:-mx-1' : ''}`}
+                />
+              ))}
+            </div>
           </div>
-          <h1 className="text-4xl font-medium">
-            <span className="text-[#004B9C] font-semibold">Spot Talent</span> find your dream job you want shortest Talents at Your Fingertips
-          </h1>
-          <p className="text-gray-900">
-            Connect with top freelancers and clients on our platform! find your perfect match for your next project.
-          </p>
-          <button className="px-6 py-2 bg-[#036BDC] max-sm:w-full text-white rounded-full w-fit">Get Started</button>
-        </div>
-
-        <div className="relative max-md:hidden mt-8 md:mt-0 w-1/2 flex justify-center">
-          <img src={personImage} alt="" width={300} height={300} />
-
-          <div className="absolute top-28 right-16 bg-white/60 backdrop-blur-sm shadow-lg rounded-xl p-4 flex flex-col items-center">
-            <FiBriefcase className="text-[#036BDC] text-3xl" />
-            <p className="font-semibold text-lg mt-2">10.5K</p>
-            <p className="text-sm text-gray-500">Job Vacancy</p>
-          </div>
-
-          <div className="absolute bottom-10 left-6 bg-white/60 backdrop-blur-sm shadow-lg rounded-xl p-4 flex flex-col items-center">
-            <BiSolidZap className="text-yellow-500 text-3xl" />
-            <p className="text-sm mt-2 w-24 text-center">It only takes a few seconds</p>
-          </div>
-
-          <div className="absolute top-20 left-2">
-            <PiStarFourFill className="text-[#4F4F4F] text-3xl" />
-          </div>
-          <div className="absolute top-4 right-20">
-            <PiStarFourFill className="text-[#4F4F4F] text-3xl" />
-
-          </div>
-          <div className="absolute bottom-20 -left-10">
-            <PiStarFourFill className="text-[#4F4F4F] text-3xl" />
-
-          </div>
-        </div>
-      </section>
-      <div className='md:-mt-8'>
-        <Searchbar />
+          {" "}
+          the Next Step Toward {" "}
+          <div className="inline-block">
+            <div className="flex">
+              {imagesBottom.map((image, index) => (
+                <img
+                  key={index}
+                  src={image.src}
+                  alt={image.alt}
+                  className={`w-16 max-md:w-10 h-16 max-md:h-10 rounded-full hover:scale-125 duration-300 ${index !== 0 ? '-mx-3 max-md:-mx-1' : ''}`}
+                />
+              ))}
+            </div>
+          </div>{" "}Your Dream
+          Career
+        </h1>
+        <p className="text-2xl max-md:text-xl text-center max-w-4xl max-md:px-6 mx-auto">
+          Step closer to your dream career with the right tools, resources, and expert guidance to help you grow, achieve your goals, and unlock new opportunities.
+        </p>
+      </div>
+      <div className="mx-auto flex gap-4 mt-10 justify-center items-center">
+        <button className="px-4 py-2 text-xl duration-300 font-semibold rounded-full bg-[#036BDC] text-white border-2 border-[#036BDC] hover:bg-white hover:text-[#036BDC]">
+          <a href="/login">Sign in</a>
+        </button>
+        <button className="px-4 py-2 text-xl duration-300 font-semibold rounded-full border-2 border-[#036BDC] hover:bg-[#036BDC] hover:text-white">
+          <a href="/signup">Request a demo</a>
+        </button>
       </div>
     </div>
   );

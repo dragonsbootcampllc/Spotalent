@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@relume_io/relume-tailwind": "^0.6.0",
+    "@relume_io/relume-ui": "^0.6.0",
     "lottie-react": "^2.4.0",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
