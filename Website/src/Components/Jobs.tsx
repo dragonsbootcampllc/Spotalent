@@ -1,11 +1,9 @@
 import React from 'react';
 import { CiBookmark } from "react-icons/ci";
-import google from '../../public/Images/google.svg';
 import { IoMdTrendingUp } from "react-icons/io";
 import { CiClock2 } from "react-icons/ci";
 import { CiLocationOn } from "react-icons/ci";
 
-// Define the types for job and component props
 type Job = {
   id: string;
   company: string;
@@ -37,7 +35,6 @@ const RecommendedJobs: React.FC<RecommendedJobsProps> = ({ jobs, selectedTags })
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-8">
         {filteredJobs.map((job, index) => (
           <div key={job.id} className="p-4 bg-white rounded-3xl border border-black">
-            {/* Apply dynamic background color based on the job's index */}
             <div className={`p-4 rounded-3xl ${bgColors[index % bgColors.length]}`}>
               <div className="flex justify-between items-center">
                 <span className="bg-white px-4 py-2 rounded-full text-sm">{job.datePosted}</span>
@@ -70,7 +67,6 @@ const RecommendedJobs: React.FC<RecommendedJobsProps> = ({ jobs, selectedTags })
               </div>
             </div>
 
-            {/* Separate div for price and buttons */}
             <div className='flex justify-between items-center mt-6 px-2'>
               <p className="text-lg font-semibold">{job.salary}</p>
               <div className="flex justify-between items-center gap-4">
