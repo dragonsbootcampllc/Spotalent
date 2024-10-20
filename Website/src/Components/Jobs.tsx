@@ -1,100 +1,92 @@
-import React from "react";
+import React from 'react';
+import { CiBookmark } from "react-icons/ci";
+import google from '../../public/Images/google.svg';
+import { IoMdTrendingUp } from "react-icons/io";
+import { CiClock2 } from "react-icons/ci";
+import { CiLocationOn } from "react-icons/ci";
 
-// JobCard Component
-interface JobCardProps {
-  logo: React.ReactNode;
-  jobType: string;
+// Define the types for job and component props
+type Job = {
+  id: string;
+  company: string;
   title: string;
-  description: string;
-}
+  tags: string[];
+  salary: string;
+  datePosted: string;
+  logo: string;
+  level: string;
+  location: string;
+  type: string;
+};
 
-const JobCard: React.FC<JobCardProps> = ({ logo, jobType, title, description }) => {
+type RecommendedJobsProps = {
+  jobs: Job[];
+  selectedTags: string[];
+};
+
+const RecommendedJobs: React.FC<RecommendedJobsProps> = ({ jobs, selectedTags }) => {
+  const bgColors = ["bg-[#E3DBFA]", "bg-[#FBE2F4]", "bg-[#E4EEFC]", "bg-[#FCEEE4]", "bg-[#FCE4E4]"];
+
+  const filteredJobs = jobs.filter((job) =>
+    job.tags.some((tag) => selectedTags.includes(tag))
+  );
+
   return (
-    <div className="flex flex-col items-start justify-between bg-white rounded-lg shadow-md p-4  max-w-60">
-      <div className="flex items-center justify-between w-full">
-        <div className="w-10 h-10">{logo}</div>
+    <div className="px-4 py-8">
+      <h2 className="text-2xl text-center font-semibold mb-6">Recommended Jobs</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-8">
+        {filteredJobs.map((job, index) => (
+          <div key={job.id} className="p-4 bg-white rounded-3xl border border-black">
+            {/* Apply dynamic background color based on the job's index */}
+            <div className={`p-4 rounded-3xl ${bgColors[index % bgColors.length]}`}>
+              <div className="flex justify-between items-center">
+                <span className="bg-white px-4 py-2 rounded-full text-sm">{job.datePosted}</span>
+                <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center">
+                  <a href="/login" className='text-[#036BDC]'><CiBookmark size={22} /></a>
+                </div>
+              </div>
 
-        <span className="text-[#7B66FF] text-sm px-2 py-1 rounded-full">{jobType}</span>
+              <p className="mt-6">{job.company}</p>
+              <div className='flex justify-between'>
+                <h3 className="text-4xl font-semibold">{job.title}</h3>
+                <img src={job.logo} alt="" className='rounded-full' />
+              </div>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {job.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-1 border border-[#ccc] hover:bg-[#004B9C] duration-300 hover:text-white text-xs rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-4 w-full flex justify-between gap-2 text-gray-600">
+                <span className='flex items-center gap-2'><IoMdTrendingUp /> {job.level}</span>
+                <span className='flex items-center gap-2'><CiClock2 /> {job.type}</span>
+                <span className='flex items-center gap-2'><CiLocationOn /> {job.location}</span>
+              </div>
+            </div>
+
+            {/* Separate div for price and buttons */}
+            <div className='flex justify-between items-center mt-6 px-2'>
+              <p className="text-lg font-semibold">{job.salary}</p>
+              <div className="flex justify-between items-center gap-4">
+                <button className="bg-[#004B9C] text-white py-1 px-4 rounded-full">
+                  <a href="/login">Apply</a>
+                </button>
+                <button className="border border-[#004B9C] text-[#004B9C] py-1 px-4 rounded-full">
+                  <a href="/login">Details</a>
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-
-      <h3 className="mt-4 text-lg font-semibold text-[#004B9C]">{title}</h3>
-
-      <p className="text-sm mt-2">{description}</p>
-
-      <a href="#" className="mt-4 text-[#004B9C] font-medium hover:underline">
-        More Details &rarr;
-      </a>
     </div>
   );
 };
 
-// JobDisplay Component
-interface JobDisplayProps {
-  jobs: {
-    logo: React.ReactNode;
-    jobType: string;
-    title: string;
-    description: string;
-  }[];
-}
-
-const JobDisplay: React.FC<JobDisplayProps> = ({ jobs }) => {
-  return (
-    <section className="py-8">
-      <h2 className="text-center text-2xl max-sm:px-10 md:max-w-96 mx-auto font-bold mb-8">
-        Top applied Jobs on our platform spot talent this month
-      </h2>
-
-      <div className="flex flex-wrap justify-center gap-6">
-        {jobs.map((job, index) => (
-          <JobCard
-            key={index}
-            logo={job.logo}
-            jobType={job.jobType}
-            title={job.title}
-            description={job.description}
-          />
-        ))}
-      </div>
-
-      <div className="flex justify-end px-8 md:px-32 mt-8">
-        <button className="bg-blue-600 max-md:w-full text-white px-6 py-2 rounded-full hover:bg-blue-700">
-          See More
-        </button>
-      </div>
-    </section>
-  );
-};
-
-const jobs = [
-  {
-    logo: <img src="../../public/Images/appstore.svg" alt="Company 1" />,
-    jobType: "Full Time",
-    title: "Email Marketing",
-    description: "Join our team as an Email Marketing Specialist and lead our digital efforts.",
-  },
-  {
-    logo: <img src="../../public/Images/gmail.svg" alt="Company 2" />,
-    jobType: "Full Time",
-    title: "Email Marketing",
-    description: "Join our team as an Email Marketing Specialist and lead our digital efforts.",
-  },
-  {
-    logo: <img src="../../public/Images/google.svg" alt="Company 3" />,
-    jobType: "Full Time",
-    title: "Email Marketing",
-    description: "Join our team as an Email Marketing Specialist and lead our digital efforts.",
-  },
-  {
-    logo: <img src="../../public/Images/figma.svg" alt="Company 4" />,
-    jobType: "Full Time",
-    title: "Email Marketing",
-    description: "Join our team as an Email Marketing Specialist and lead our digital efforts.",
-  },
-];
-
-const App = () => {
-  return <JobDisplay jobs={jobs} />;
-};
-
-export default App;
+export default RecommendedJobs;
