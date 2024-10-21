@@ -32,21 +32,21 @@ const RecommendedJobs: React.FC<RecommendedJobsProps> = ({ jobs, selectedTags })
   return (
     <div className="px-4 py-8">
       <h2 className="text-2xl text-center font-semibold mb-6">Recommended Jobs</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-8">
         {filteredJobs.map((job, index) => (
           <div key={job.id} className="p-4 bg-white rounded-3xl border border-black">
             <div className={`p-4 rounded-3xl ${bgColors[index % bgColors.length]}`}>
               <div className="flex justify-between items-center">
-                <span className="bg-white px-4 py-2 rounded-full text-sm">{job.datePosted}</span>
+                <span className="bg-white px-3 py-1 rounded-full text-sm">{job.datePosted}</span>
                 <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center">
                   <a href="/login" className='text-[#036BDC]'><CiBookmark size={22} /></a>
                 </div>
               </div>
 
-              <p className="mt-6">{job.company}</p>
-              <div className='flex justify-between'>
-                <h3 className="text-4xl font-semibold">{job.title}</h3>
-                <img src={job.logo} alt="" className='rounded-full' />
+              <p className="mt-4 text-lg">{job.company}</p>
+              <div className='flex justify-between items-center mt-2'>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">{job.title}</h3>
+                <img src={job.logo} alt="" className='rounded-full h-10 w-10 sm:h-12 sm:w-12' />
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2">
@@ -67,13 +67,13 @@ const RecommendedJobs: React.FC<RecommendedJobsProps> = ({ jobs, selectedTags })
               </div>
             </div>
 
-            <div className='flex justify-between items-center mt-6 px-2'>
-              <p className="text-lg font-semibold">{job.salary}</p>
+            <div className='flex flex-col sm:flex-row justify-between items-center mt-6 px-2'>
+              <p className="text-lg font-semibold mb-4 sm:mb-0">{job.salary}</p>
               <div className="flex justify-between items-center gap-4">
-                <button className="bg-[#004B9C] text-white py-1 px-4 rounded-full">
+                <button className="bg-[#004B9C] text-white py-2 px-4 rounded-full">
                   <a href="/login">Apply</a>
                 </button>
-                <button className="border border-[#004B9C] text-[#004B9C] py-1 px-4 rounded-full">
+                <button className="border border-[#004B9C] text-[#004B9C] py-2 px-4 rounded-full">
                   <a href="/login">Details</a>
                 </button>
               </div>
