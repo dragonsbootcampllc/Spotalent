@@ -10,11 +10,11 @@ import Pricing from '../Components/Pricing';
 import Subscribe from '../Components/Subscribe';
 import FAQSection from '../Components/FAQ';
 import Footer from '../Components/Footer';
-import google from "../../public/Images/google.svg";
-import gmail from "../../public/Images/gmail.svg";
-import steam from "../../public/Images/steam.svg";
-import edge from "../../public/Images/edge.svg";
-import netflix from "../../public/Images/netflix.svg";
+import google from "/Images/google.svg";
+import gmail from "/Images/gmail.svg";
+import steam from "/Images/steam.svg";
+import edge from "/Images/edge.svg";
+import netflix from "/Images/netflix.svg";
 
 
 const Home: React.FC = () => {

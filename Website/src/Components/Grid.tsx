@@ -1,12 +1,12 @@
 import React from "react";
-import game from "../../public/Videos/3d-glassy-abstract-hashtag.webm";
+import game from "/Videos/3d-glassy-abstract-hashtag.webm";
 import { BiTestTube } from "react-icons/bi";
 import { FiArrowUpRight } from "react-icons/fi";
 import { VscGame } from "react-icons/vsc";
 import Lottie from 'react-lottie';
 import aitest from '../../public/lotties/network robot assistant working on laptop.json';
 import cv from '../../public/lotties/beam-levitating-sticker.json';
-import work from '../../public/Videos/3d-glassy-abstract-spiral-band-blue.webm';
+import work from '/Videos/3d-glassy-abstract-spiral-band-blue.webm';
 import { TbFileCv } from "react-icons/tb";
 import { RiRobot3Line } from "react-icons/ri";
 

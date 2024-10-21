@@ -1,10 +1,10 @@
 import React from "react";
-import moha from "../../public/Images/Mohamed_Ali.jpg";
-import ahmed from "../../public/Images/AhmedSherif.jpeg";
-import faisool from "../../public/Images/Faysool.jpg";
-import nageh from "../../public/Images/Ahmed_Nageh.jpg";
-import mohab from "../../public/Images/Mohab_Mohammed.jpg";
-import tarek from "../../public/Images/Ahmed_tarek.jpg";
+import moha from "/Images/Mohamed_Ali.jpg";
+import ahmed from "/Images/AhmedSherif.jpeg";
+import faisool from "/Images/Faysool.jpg";
+import nageh from "/Images/Ahmed_Nageh.jpg";
+import mohab from "/Images/Mohab_Mohammed.jpg";
+import tarek from "/Images/Ahmed_tarek.jpg";
 
 const imagesTop = [
   { src: ahmed, alt: "Ahmed Sherif" },

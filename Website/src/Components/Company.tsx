@@ -1,10 +1,10 @@
 import React from "react";
-import spotify from "../../public/Images/spotify.png";
-import zoom from "../../public/Images/zoom.png";
-import coinbase from "../../public/Images/coinbase.png";
-import adobe from "../../public/Images/adobe.png";
-import slack from "../../public/Images/slack.png";
-import webflow from "../../public/Images/webflow.svg";
+import spotify from "/Images/spotify.png";
+import zoom from "/Images/zoom.png";
+import coinbase from "/Images/coinbase.png";
+import adobe from "/Images/adobe.png";
+import slack from "/Images/slack.png";
+import webflow from "/Images/webflow.svg";
 
 const logos = [
   { src: spotify, alt: "spotify" },

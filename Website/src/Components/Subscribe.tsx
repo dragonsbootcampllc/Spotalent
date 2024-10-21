@@ -1,6 +1,6 @@
 import React from 'react';
-import lolo from '../../public/Images/3d-glassy-fluid-motion-on-blue-egg-shaped-objects.png';
-import toto from '../../public/Images/Group.svg';
+import lolo from '/Images/3d-glassy-fluid-motion-on-blue-egg-shaped-objects.png';
+import toto from '/Images/Group.svg';
 
 const Subscribe: React.FC = () => {
   return (

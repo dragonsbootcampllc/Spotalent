@@ -1,5 +1,5 @@
 import React from "react";
-import man from '../../public/Images/Ellipse.png';
+import man from '/Images/Ellipse.png';
 import { RiDoubleQuotesR } from "react-icons/ri";
 
 const commentsData = [

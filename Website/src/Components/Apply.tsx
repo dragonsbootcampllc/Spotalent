@@ -1,5 +1,5 @@
 import React from "react";
-import apply from "../../public/Images/apply.png";
+import apply from "/Images/apply.png";
 
 const Apply: React.FC = () => {
   return (
