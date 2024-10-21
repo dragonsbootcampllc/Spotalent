@@ -11,6 +11,10 @@ import Subscribe from '../Components/Subscribe';
 import FAQSection from '../Components/FAQ';
 import Footer from '../Components/Footer';
 import google from "../../public/Images/google.svg";
+import gmail from "../../public/Images/gmail.svg";
+import steam from "../../public/Images/steam.svg";
+import edge from "../../public/Images/edge.svg";
+import netflix from "../../public/Images/netflix.svg";
 
 
 const Home: React.FC = () => {
@@ -36,36 +40,36 @@ const Home: React.FC = () => {
             },
             {
               id: "2",
-              company: "Google",
+              company: "Steam",
               title: "Software Engineer",
-              tags: ["Marketing", "Sales", "Engineering"],
+              tags: ["Gaming", "Sales", "Engineering"],
               salary: "$120,000",
-              datePosted: "2 days ago",
-              logo: google,
+              datePosted: "10 Jan 24",
+              logo: steam,
               level: "Senior",
               location: "Egypt",
               type: "Full-time",
             },
             {
               id: "3",
-              company: "Netflix",
+              company: "Gmail",
               title: "Software Engineer",
               tags: ["Marketing", "Sales", "Engineering"],
               salary: "$200-$300",
               datePosted: "2 days ago",
-              logo: google,
+              logo: gmail,
               level: "Senior",
               location: "Europe",
               type: "Full-time",
             },
             {
               id: "4",
-              company: "Netflix",
+              company: "Microsoft Edge",
               title: "Software Engineer",
               tags: ["Marketing", "Sales", "Engineering"],
               salary: "$200-$300",
               datePosted: "2 days ago",
-              logo: google,
+              logo: edge,
               level: "Senior",
               location: "Saudi",
               type: "Full-time",
@@ -77,7 +81,7 @@ const Home: React.FC = () => {
               tags: ["Marketing", "Sales", "Engineering"],
               salary: "$200-$300",
               datePosted: "2 days ago",
-              logo: google,
+              logo: netflix,
               level: "Senior",
               location: "UK",
               type: "Full-time",
