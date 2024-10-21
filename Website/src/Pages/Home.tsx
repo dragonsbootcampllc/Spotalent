@@ -15,6 +15,7 @@ import gmail from "/Images/gmail.svg";
 import steam from "/Images/steam.svg";
 import edge from "/Images/edge.svg";
 import netflix from "/Images/netflix.svg";
+import Testimonials from '../Components/Testimonials';
 
 
 const Home: React.FC = () => {
@@ -24,6 +25,7 @@ const Home: React.FC = () => {
           <Hero />
         </div>
         <Company />
+        <Testimonials />
         <Jobs 
           jobs={[
             {
