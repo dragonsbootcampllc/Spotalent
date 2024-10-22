@@ -17,7 +17,6 @@ import edge from "/Images/edge.svg";
 import netflix from "/Images/netflix.svg";
 import Testimonials from '../Components/Testimonials';
 
-
 const Home: React.FC = () => {
     return (
       <div className="w-full max-w-[1400px] mx-auto h-full">
