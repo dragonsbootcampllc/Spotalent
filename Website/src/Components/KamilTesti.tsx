@@ -59,7 +59,7 @@ export const Testimonial4 = (props: Testimonial4Props) => {
 export const Testimonial4Defaults: Testimonial4Props = {
   numberOfStars: 5,
   quote:
-    '"Spotalents has been essential in helping us find the new talent. Their developers go beyond just implementing tasks; they take full ownership, consistently deliver outcomes, and add their own perspective and ideas."',
+    '"Developers go beyond just implementing tasks; they take full ownership, consistently deliver outcomes, and add their own perspective and ideas."',
   avatar: {
     src: "/Images/Kamil.webp",
     alt: "Kamil Litman",
