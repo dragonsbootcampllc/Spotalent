@@ -5,25 +5,25 @@ import { FaHandHoldingHeart } from "react-icons/fa";
 const cardData = [
   {
     icon: <PiShootingStarBold className="text-[#004B9C] text-5xl group-hover:text-white" />,
-    title: "80% Faster Hire",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil voluptates, voluptas, voluptatem, voluptatibus, volupta"
+    title: "95% Faster Hiring Process",
+    description: "Streamline your recruitment with Spotalent’s AI-driven matching. Reduce hiring time by 95% with access to pre-vetted candidates ready to contribute from day one."
   },
   {
     icon: <FaHandHoldingHeart className="text-[#004B9C] text-5xl group-hover:text-white" />,
-    title: "80% Faster Hire",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil voluptates, voluptas, voluptatem, voluptatibus, volupta"
+    title: "Trusted Verification with Blockchain",
+    description: "Experience unmatched trust and transparency. Every candidate’s experience and skills are blockchain-verified to ensure authenticity and reduce hiring risks."
   },
   {
     icon: <PiMagicWandBold className="text-[#004B9C] text-5xl group-hover:text-white" />,
-    title: "80% Faster Hire",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil voluptates, voluptas, voluptatem, voluptatibus, volupta"
+    title: "Tailored Talent Solutions",
+    description: "Access the best talent globally, precisely matched to your needs, saving you time and costs on unnecessary filtering and assessments."
   }
 ];
 
 const CardsHover: React.FC = () => {
   return (
     <div className="my-20">
-      <h2 className="text-center text-4xl font-bold max-w-xl mx-auto mb-10">Levarage global world-class talented people</h2>
+      <h2 className="text-center text-4xl font-bold max-w-2xl mx-auto mb-10">Unlock Global Talent Potential with Verified, World-Class Candidates</h2>
       <div className="mb-10 max-md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:px-32">
           {cardData.map((card, index) => (

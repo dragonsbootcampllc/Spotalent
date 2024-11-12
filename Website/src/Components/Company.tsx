@@ -1,18 +1,16 @@
 import React from "react";
-import spotify from "/Images/spotify.png";
-import zoom from "/Images/zoom.png";
-import coinbase from "/Images/coinbase.png";
-import adobe from "/Images/adobe.png";
-import slack from "/Images/slack.png";
-import webflow from "/Images/webflow.svg";
+import Dragons from "/Images/dragons.svg";
+import Microsoft from "/Images/microsoft.png";
+import neferdata from "/Images/neferdata.png";
+import actusgo from "/Images/actusgo.png";
+import levelup from "/Images/levelup.png";
 
 const logos = [
-  { src: spotify, alt: "spotify" },
-  { src: zoom, alt: "zoom" },
-  { src: coinbase, alt: "coinbase" },
-  { src: adobe, alt: "adobe" },
-  { src: slack, alt: "slack" },
-  { src: webflow, alt: "webflow" },
+  { src: Microsoft, alt: "Microsoft Founders Hub" },
+  { src: Dragons, alt: "Dragons" },
+  { src: neferdata, alt: "neferdata" },
+  { src: actusgo, alt: "actusgo" },
+  { src: levelup, alt: "levelup" },
 ];
 
 const Company: React.FC = () => {

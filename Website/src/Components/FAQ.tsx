@@ -27,20 +27,28 @@ const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, ans
 const FAQSection: React.FC = () => {
   const faqs: FAQ[] = [
     {
-      question: 'What is Sales Analytics SaaS?',
-      answer: 'Sales Analytics SaaS (Software as a Service) is a cloud-based platform that empowers businesses to gain insights into their sales performance through data analysis.'
+      question: 'What is Spotalent?',
+      answer: 'Spotalent is a comprehensive talent management platform that connects job seekers, companies, and educational institutions. It leverages blockchain technology for secure work experience verification and advanced AI for candidate filtering.'
     },
     {
-      question: 'How can Sales Analytics SaaS benefit my business?',
-      answer: 'It provides data-driven insights, improves decision-making, and enhances sales strategies.'
+      question: 'How can Spotalent help my business?',
+      answer: 'Spotalent provides access to a pre-filtered pool of talented candidates, analytics on hiring trends, and verification of work experience through blockchain, helping businesses save time and resources.'
     },
     {
-      question: 'Is Sales Analytics SaaS suitable for businesses of all sizes?',
-      answer: 'Yes, it is designed to scale with your business, making it suitable for small, medium, and large enterprises.'
+      question: 'Is Spotalent suitable for companies of all sizes?',
+      answer: 'Yes, Spotalent offers flexible plans to suit startups, growing companies, and large enterprises, with scalable features based on your recruitment needs.'
     },
     {
-      question: 'How easy is it to integrate Sales Analytics SaaS?',
-      answer: 'Integration is straightforward, with support for various APIs and tools for seamless connectivity.'
+      question: 'How easy is it to integrate Spotalent with my existing systems?',
+      answer: 'Spotalent’s API can seamlessly integrate with popular ATS (Applicant Tracking Systems) and HR tools, making it easy to adopt without disrupting your current workflow.'
+    },
+    {
+      question: 'What security measures does Spotalent use for candidate verification?',
+      answer: 'We use blockchain technology to ensure that work experiences are authentic and tamper-proof, giving employers confidence in their hiring decisions.'
+    },
+    {
+      question: 'How does Spotalent support job seekers?',
+      answer: 'Job seekers on Spotalent can showcase verified work experience, connect with top companies, and receive personalized job recommendations based on their skills and career goals.'
     }
   ];
 
