@@ -23,7 +23,7 @@ const cardData = [
 const CardsHover: React.FC = () => {
   return (
     <div className="my-20">
-      <h2 className="text-center text-4xl font-bold max-w-2xl mx-auto mb-10">Unlock Global Talent Potential with Verified, World-Class Candidates</h2>
+      <h2 className="text-center text-4xl px-4 font-bold max-w-2xl mx-auto mb-10">Unlock Global Talent Potential with Verified, World-Class Candidates</h2>
       <div className="mb-10 max-md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:px-32">
           {cardData.map((card, index) => (
