@@ -15,7 +15,10 @@ urlpatterns = [
     path('interview/',view=views.GetAllInterviews.as_view()),                              # show Interviews with job_id
 
     path('category',view=views.GetCreateCategory.as_view()),                               # show all categories & create a new category
-    path('question',view=views.ShowQuestions.as_view()),                                   # show all questions
+    path('question',view=views.ShowQuestions.as_view()),      
+    path('register',view=views.RegisterRecruiter.as_view()),      
+    path('profile/update',view=views.UpdateRecruiterProfile.as_view()),      
+    # show all questions
     # path('user/<int:pk>',view=views.GetUesr.as_view()),
     # path('user/',view=views.GetUsers.as_view()),
     # path('createApplication/',view=views.CreateApplication.as_view()),
