@@ -1,6 +1,6 @@
 import axios from "axios";
 import { User } from "../types";
-import { API_BASE_URL } from "./constants";
+import { API_BASE_URL } from "./config";
 
 export interface AuthResponse {
   token: string;
