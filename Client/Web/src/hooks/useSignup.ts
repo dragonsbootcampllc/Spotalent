@@ -17,6 +17,7 @@ const useSignup = (): UseMutationResult<
         SignupError,
         { name: string; email: string; password: string }
     >({
+        mutationKey: ["signup"],
         mutationFn: signup,
         onSuccess: (data: AuthResponse) => {
             console.log("Signup successful:", data);

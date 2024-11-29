@@ -18,6 +18,7 @@ const useLogin = (): UseMutationResult<
         LoginError,
         { email: string; password: string }
     >({
+        mutationKey: ["login"],
         mutationFn: login,
         onSuccess: (data: AuthResponse) => {
             console.log("Login successful:", data);
