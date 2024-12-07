@@ -8,6 +8,11 @@ User = settings.AUTH_USER_MODEL
 class Recruiter(models.Model):
     user = models.OneToOneField(User, related_name='recruiter', on_delete=models.CASCADE)
     date_of_birth = models.DateField()
+    phone = models.CharField(max_length=15, null=True, blank=True)
+    first_link = models.URLField(null=True, blank=True)
+    second_link = models.URLField(null=True, blank=True)
+    company = models.CharField(max_length=255, null=True, blank=True)
+
 
 
 class Application(models.Model):

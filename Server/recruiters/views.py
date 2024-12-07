@@ -1,33 +1,52 @@
 from django.shortcuts import get_object_or_404
-
-from rest_framework.response import Response
-from rest_framework import status
-from recruiters.models import Recruiter, Question, Category, JobPost, Applied \
-        ,Application, Interview,Application
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
-from recruiters import serializers
+from recruiters import serializers 
 from applicants import serializers as aplicantSerializers
+
+from recruiters.models import Recruiter, Question, Category, JobPost, Applied \
+        ,Application, Interview,Application
+from rest_framework.response import Response
+from rest_framework import status
 from rest_framework import generics
 from rest_framework import generics, mixins
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.exceptions import NotFound, AuthenticationFailed
+from rest_framework.pagination import PageNumberPagination
 
 import core.Utils as Utils
 
 # Create your views here.
 
+class RegisterRecruiter(generics.CreateAPIView): # error
+    queryset = Recruiter.objects.all()
+    serializer_class = serializers.RecruiterSerializer
+    authentication_classes = []
+
+class JobPostPagination(PageNumberPagination):
+    page_size = 10  
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
 # post a job 
 class GetCreatePostJob(generics.GenericAPIView, mixins.CreateModelMixin, mixins.ListModelMixin):
     serializer_class = serializers.JobPostSerializer
-
+    authentication_classes = [TokenAuthentication]
+    pagination_class = JobPostPagination  
+    
     def post(self, request, *args, **kwargs):
         # Extract recruiter_id from request data
         data = request.data.copy()
 
         recruiter_id = data['recruiter']
 
+        if not request.user or not request.user.is_authenticated:
+            raise AuthenticationFailed("Authentication token is missing or invalid.")
+        
         try:
             # Check if the Recruiter with the given ID exists
             recruiter = get_object_or_404(Recruiter, pk=recruiter_id)
@@ -54,21 +73,29 @@ class GetCreatePostJob(generics.GenericAPIView, mixins.CreateModelMixin, mixins.
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        postJob = serializer.save()
+        
+        response_data = Utils.generate_response_with_token(request.user, {"schedule_Interview_data": serializer.data})
+        return Response(response_data, status=status.HTTP_201_CREATED)
 
     def perform_create(self, serializer):
         serializer.save()
 
     def get_queryset(self):
-        recruiter = get_object_or_404(Recruiter, pk=self.request.data['recruiter_id'])
-        return JobPost.objects.filter(recruiter=recruiter)
+        category_id = self.request.query_params.get('category', None)
+
+        if category_id:
+            category = get_object_or_404(Category, pk=category_id)
+            return JobPost.objects.filter(category=category)
+
+        return JobPost.objects.all()
 
     def get(self, request):
         return self.list(request)
     
 class GetJobInterviews(generics.GenericAPIView, mixins.ListModelMixin):
     serializer_class = serializers.InterviewSerializer
-
+    authentication_classes = [TokenAuthentication]
     def get_queryset(self):
         recruiter_id = self.request.data.get('recruiter_id')
         job_id = self.kwargs['job_id']
@@ -101,15 +128,20 @@ class ShowApplicants(generics.GenericAPIView, mixins.ListModelMixin):
     
 # approve an applicant
 class UpdateApplicantStats(generics.UpdateAPIView):
+    authentication_classes = [TokenAuthentication]
     serializer_class = serializers.AppliedSerializer
     queryset = Applied.objects.all()
     
     def partial_update(self, request, *args, **kwargs):
         applied = self.get_object()
         data = request.data.copy()
+        
+        if not request.user or not request.user.is_authenticated:
+            raise AuthenticationFailed("Authentication token is missing or invalid.")
+
         if data.get('approved') is None:
             return Response({"approved": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
-        
+
         applied.approved = data['approved']
         serializer = self.get_serializer(applied, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
@@ -118,7 +150,9 @@ class UpdateApplicantStats(generics.UpdateAPIView):
             'approved': applied.approved,
             'message': f"stats updated successfully to {data['approved']}",
         })
-        return Response(result, status=status.HTTP_200_OK)
+        
+        response_deta = Utils.generate_response_with_token(request.user, {"Applicantstats":result})
+        return Response(response_deta, status=status.HTTP_200_OK)
 
     def perform_update(self, serializer):
         serializer.save()
@@ -126,7 +160,9 @@ class UpdateApplicantStats(generics.UpdateAPIView):
 # schedule an interview
 class ScheduleInterview(generics.CreateAPIView,generics.UpdateAPIView):
     serializer_class = serializers.InterviewSerializer
+    authentication_classes = [TokenAuthentication]
     queryset = Interview.objects.all()
+
 
     def get_object(self):
         return Interview.objects.filter(applied=self.kwargs['applied_id']).first()
@@ -134,8 +170,13 @@ class ScheduleInterview(generics.CreateAPIView,generics.UpdateAPIView):
     def post(self, request, applied_id):
         recruiter = get_object_or_404(Recruiter, pk=self.request.data['recruiter_id'])
         applied_job = get_object_or_404(Applied, pk=applied_id)
+        
+        if not request.user or not request.user.is_authenticated:
+            raise AuthenticationFailed("Authentication token is missing or invalid.")
+        
 
         data = self.request.data.copy()
+        
         if Interview.objects.filter(applied=applied_job).exists():
             return Response({"message": ["Interview already scheduled for this applicant"]}, status=status.HTTP_400_BAD_REQUEST)
         
@@ -149,13 +190,18 @@ class ScheduleInterview(generics.CreateAPIView,generics.UpdateAPIView):
 
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
+        
+        interview = serializer.save()
+        response_data = Utils.generate_response_with_token(request.user, {"schedule_Interview_data": serializer.data})
 
-        return self.create(serializer)
+        return Response(response_data, status=status.HTTP_201_CREATED)
     
     def partial_update(self, request,applied_id):
         interview = self.get_object()
         data = request.data.copy()
-
+        if not request.user or not request.user.is_authenticated:
+            raise AuthenticationFailed("Authentication token is missing or invalid.")
+        
         if not isinstance(interview, Interview):
             return Response({"message": ["Interview not found"]}, status=status.HTTP_404_NOT_FOUND)
         
@@ -180,9 +226,11 @@ class ScheduleInterview(generics.CreateAPIView,generics.UpdateAPIView):
         if data.get('cancelled') is not None:
             result['cancelled'] = interview.cancelled
             result['message'].append(f"Interview cancelled successfully")
+            
+        # TODO: Handle no body fileds
+        response_data = Utils.generate_response_with_token(request.user, {"schedule_Interview_data": result})
+        return Response(response_data, status=status.HTTP_201_CREATED)
 
-        # TODO: Handle no body fileds 
-        return Response(result, status=status.HTTP_200_OK)
     def perform_update(self, serializer):
         instance = serializer.instance
         serializer.save()
@@ -237,6 +285,7 @@ class GetUesr(generics.RetrieveAPIView):
 #get categories & add category
 class GetCreateCategory(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     serializer_class = serializers.CategorySerializer
+    authentication_classes = [TokenAuthentication]
 
     def get_queryset(self):
         return Category.objects.all()
@@ -256,6 +305,22 @@ class GetCreateRecruiters(generics.GenericAPIView, mixins.CreateModelMixin, mixi
 
     def get(self, request):
         return self.list(request)
-    
+
     def post(self, request):
         return self.create(request)
+
+class UpdateRecruiterProfile(generics.RetrieveUpdateAPIView):
+    serializer_class = serializers.RecruiterUpdateSerializer
+    authentication_classes = [TokenAuthentication]
+
+    def get_object(self):
+        return self.request.user
+
+    def patch(self, request):
+        user = request.user
+        recruiter = user.recruiter
+        serializer = serializers.RecruiterUpdateSerializer(recruiter, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        response_data = Utils.generate_response_with_token(request.user, {'Update_Profile': serializer.data})
+        return Response(response_data, status=status.HTTP_200_OK)
